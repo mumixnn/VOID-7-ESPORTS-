@@ -14,7 +14,7 @@ body {
   text-align: center;
 }
 
-/* LAST UPDATED BADGE */
+/* LAST UPDATED */
 .last-updated {
   position: fixed;
   top: 15px;
@@ -37,15 +37,31 @@ h1 {
 /* PLAYER CARD */
 .player {
   background: rgba(255,255,255,0.05);
-  max-width: 500px;
+  max-width: 520px;
   margin: 20px auto;
   padding: 20px;
   border-radius: 15px;
 }
 
-.player h2 {
-  color: red;
+/* PLAYER HEADER */
+.player-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
   margin-bottom: 10px;
+}
+
+.player-header img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid red;
+}
+
+.player-header h2 {
+  color: red;
+  margin: 0;
 }
 
 /* TABLE */
@@ -86,7 +102,6 @@ a.return-home:hover {
 
 <body>
 
-<!-- LAST UPDATED -->
 <div class="last-updated">
   Last Updated<br>
   Date: 15 Jan 2026
@@ -96,7 +111,10 @@ a.return-home:hover {
 
 <!-- PLAYER 1 -->
 <div class="player">
-  <h2>V7 LUFFY</h2>
+  <div class="player-header">
+    <img src="images/luffy.png" alt="V7 Luffy">
+    <h2>V7 LUFFY</h2>
+  </div>
   <table>
     <tr><th>Kills</th><th>Damage</th></tr>
     <tr><td>7</td><td>787</td></tr>
@@ -105,7 +123,10 @@ a.return-home:hover {
 
 <!-- PLAYER 2 -->
 <div class="player">
-  <h2>V7 VIEL</h2>
+  <div class="player-header">
+    <img src="images/viel.png" alt="V7 Viel">
+    <h2>V7 VIEL</h2>
+  </div>
   <table>
     <tr><th>Kills</th><th>Damage</th></tr>
     <tr><td>7</td><td>700</td></tr>
@@ -114,7 +135,10 @@ a.return-home:hover {
 
 <!-- PLAYER 3 -->
 <div class="player">
-  <h2>V7 GOD</h2>
+  <div class="player-header">
+    <img src="images/god.png" alt="V7 God">
+    <h2>V7 GOD</h2>
+  </div>
   <table>
     <tr><th>Kills</th><th>Damage</th></tr>
     <tr><td>7</td><td>759</td></tr>
@@ -123,14 +147,16 @@ a.return-home:hover {
 
 <!-- PLAYER 4 -->
 <div class="player">
-  <h2>V7 RUNE</h2>
+  <div class="player-header">
+    <img src="images/rune.png" alt="V7 Rune">
+    <h2>V7 RUNE</h2>
+  </div>
   <table>
     <tr><th>Kills</th><th>Damage</th></tr>
     <tr><td>7</td><td>734</td></tr>
   </table>
 </div>
 
-<!-- RETURN BUTTON -->
 <a href="index.html" class="return-home">Return Home</a>
 
 </body>
