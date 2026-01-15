@@ -2,104 +2,117 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Player Stats | VOID 7 ESPORTS</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Player Stats | VOID 7 ESPORTS</title>
 
 <style>
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  background: linear-gradient(135deg, #0b0b0b, #440000);
   color: white;
-}
-
-nav {
-  padding: 15px;
   text-align: center;
-  background: rgba(0,0,0,0.4);
 }
 
-nav a {
-  color: white;
-  text-decoration: none;
-  margin: 0 15px;
-  font-weight: bold;
-}
-
+/* HEADER */
 h1 {
-  text-align: center;
-  margin: 25px 0;
+  margin-top: 40px;
+  font-size: 40px;
+  color: #ff4d4d;
 }
 
+/* PLAYER CARD */
 .player {
-  background: rgba(255,255,255,0.08);
-  margin: 15px;
-  padding: 15px;
+  background: rgba(255,255,255,0.05);
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 20px;
   border-radius: 15px;
 }
 
 .player h2 {
+  color: red;
   margin-bottom: 10px;
-  color: #ff4d6d;
 }
 
+/* TABLE */
 table {
   width: 100%;
   border-collapse: collapse;
+  margin-top: 10px;
 }
 
 th, td {
   padding: 10px;
-  text-align: center;
   border-bottom: 1px solid rgba(255,255,255,0.2);
 }
 
 th {
-  color: #00eaff;
+  color: #ff4d4d;
+  font-weight: bold;
+}
+
+/* RETURN BUTTON */
+a.return-home {
+  display: inline-block;
+  margin: 30px auto 50px auto;
+  padding: 15px 30px;
+  background: linear-gradient(90deg, #ff0000, #aa0000);
+  color: white;
+  text-decoration: none;
+  border-radius: 10px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+a.return-home:hover {
+  background: linear-gradient(90deg, #ff4d4d, #ff1a1a);
 }
 </style>
 </head>
 
 <body>
 
-<nav>
-  <a href="index.html">Home</a>
-  <a href="players.html">Player Stats</a>
-</nav>
+<h1>Player Stats</h1>
 
-<h1>Player Statistics</h1>
-
+<!-- PLAYER 1 -->
 <div class="player">
   <h2>V7 LUFFY</h2>
   <table>
     <tr><th>Kills</th><th>Damage</th></tr>
-    <tr><td>25</td><td>3890</td></tr>
+    <tr><td>7</td><td>700</td></tr>
   </table>
 </div>
 
+<!-- PLAYER 2 -->
 <div class="player">
   <h2>V7 VIEL</h2>
   <table>
     <tr><th>Kills</th><th>Damage</th></tr>
-    <tr><td>16</td><td>2760</td></tr>
+    <tr><td>7</td><td>700</td></tr>
   </table>
 </div>
 
+<!-- PLAYER 3 -->
 <div class="player">
   <h2>V7 GOD</h2>
   <table>
     <tr><th>Kills</th><th>Damage</th></tr>
-    <tr><td>20</td><td>3120</td></tr>
+    <tr><td>7</td><td>100</td></tr>
   </table>
 </div>
 
+<!-- PLAYER 4 -->
 <div class="player">
   <h2>V7 RUNE</h2>
   <table>
     <tr><th>Kills</th><th>Damage</th></tr>
-    <tr><td>18</td><td>2950</td></tr>
+    <tr><td>7</td><td>700</td></tr>
   </table>
 </div>
+
+<!-- RETURN BUTTON -->
+<a href="index.html" class="return-home">Return Home</a>
 
 </body>
 </html>
