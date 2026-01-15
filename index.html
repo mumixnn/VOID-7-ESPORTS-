@@ -25,7 +25,7 @@ header img {
   height: 100px;
   display: block;
   margin: 0 auto 20px auto;
-  border-radius: 50%; /* circular logo */
+  border-radius: 50%;
 }
 
 header h1 {
@@ -40,28 +40,41 @@ header p {
   max-width: 700px;
   margin: 0 auto;
   line-height: 1.6;
-  color: #fff;
 }
 
-/* BUTTONS */
-section.buttons, section.affiliate {
+/* BUTTON SECTIONS */
+section.buttons,
+section.affiliate,
+section.donation {
   margin: 30px 0;
 }
 
-.buttons a, .affiliate a {
+.buttons a,
+.affiliate a,
+.donation a {
   background: linear-gradient(90deg, #ff0000, #aa0000);
   padding: 15px 35px;
   color: white;
   text-decoration: none;
   border-radius: 10px;
   font-weight: bold;
-  margin: 0 10px;
+  margin: 10px;
   display: inline-block;
   transition: all 0.3s ease;
 }
 
-.buttons a:hover, .affiliate a:hover {
+.buttons a:hover,
+.affiliate a:hover,
+.donation a:hover {
   background: linear-gradient(90deg, #ff4d4d, #ff1a1a);
+}
+
+/* TITLES */
+.affiliate h2,
+.donation h2,
+section.contact h2 {
+  color: #ff4d4d;
+  margin-bottom: 15px;
 }
 
 /* CONTACT SECTION */
@@ -73,16 +86,6 @@ section.contact {
   border-radius: 15px;
 }
 
-section.contact h2 {
-  color: #ff4d4d;
-  margin-bottom: 15px;
-}
-
-section.contact p {
-  font-size: 16px;
-  margin: 5px 0;
-}
-
 section.contact a {
   color: red;
   text-decoration: none;
@@ -90,11 +93,6 @@ section.contact a {
 
 section.contact a:hover {
   text-decoration: underline;
-}
-
-.affiliate h2 {
-  color: #ff4d4d;
-  margin-bottom: 15px;
 }
 </style>
 </head>
@@ -108,20 +106,28 @@ section.contact a:hover {
   <p>Professional Esports Organisation from Kashmir. Competing in BGMI with a vision to reach the global stage.</p>
 </header>
 
-<!-- PLAYER STATS BUTTON -->
+<!-- PLAYER STATS -->
 <section class="buttons">
   <a href="players.html">Player Stats</a>
 </section>
 
-<!-- AFFILIATE BUTTON -->
+<!-- AFFILIATE -->
 <section class="affiliate">
-  <h2>Check Gaming Gear</h2>
-  <a href="https://amzn.to/4qucTTc" target="_blank">
+  <h2>Gaming Gear</h2>
+  <a href="https://www.amazon.in/dp/B09ABC123?tag=youraffiliateID" target="_blank">
     Buy Gaming Gear
   </a>
 </section>
 
-<!-- CONTACT SECTION -->
+<!-- DONATION -->
+<section class="donation">
+  <h2>Support VOID 7 ESPORTS</h2>
+  <a href="https://www.buymeacoffee.com/yourusername" target="_blank">
+    Donate / Buy Me a Coffee
+  </a>
+</section>
+
+<!-- CONTACT -->
 <section class="contact">
   <h2>Contact Us</h2>
   <p>Instagram: <a href="https://instagram.com/Void7_esports" target="_blank">@Void7_esports</a></p>
