@@ -1,105 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>VOID 7 Esports | Esports Organisation from Kashmir</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VOID 7 ESPORTS</title>
 
-  <meta name="description" content="VOID 7 Esports is a professional esports organisation from Kashmir, India competing in BGMI.">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+/* GENERAL BODY */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #0b0b0b, #440000);
+  color: white;
+}
 
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
-
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Orbitron', sans-serif;
-      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-      color: white;
-      text-align: center;
-    }
-
-    header {
-      padding: 70px 20px;
-    }
-
-    h1 {
-      font-size: 3rem;
-      background: linear-gradient(90deg, #ff004f, #00eaff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    section {
-      max-width: 900px;
-      margin: auto;
-      padding: 40px 20px;
-    }
-
-    .card {
-      background: rgba(255,255,255,0.08);
-      border-radius: 18px;
-      padding: 30px;
-      margin-bottom: 30px;
-    }
-
-    .btn {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 14px 30px;
-      border-radius: 30px;
-      text-decoration: none;
-      color: white;
-      background: linear-gradient(90deg, #ff004f, #ff7b00);
-    }
-
-    footer {
-      padding: 25px;
-      color: #aaa;
-      font-size: 0.8rem;
-      .buttons {
+/* NAVBAR */
+nav {
   display: flex;
-  gap: 15px;
-  justify-content: center;
-  margin-top: 20px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background: rgba(0,0,0,0.6);
 }
 
-.btn.secondary {
-  background: linear-gradient(90deg, #00c6ff, #0072ff);
+nav .logo {
+  color: red;
+  font-weight: bold;
+  font-size: 20px;
 }
-    }
-  </style>
+
+nav .nav-links a {
+  color: white;
+  text-decoration: none;
+  margin-left: 20px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+nav .nav-links a:hover,
+nav .nav-links .active {
+  color: red;
+}
+
+/* HEADER SECTION */
+header {
+  text-align: center;
+  padding: 80px 20px 40px 20px;
+}
+
+header h1 {
+  font-size: 50px;
+  background: linear-gradient(90deg, #ff0000, #ff4d4d);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 20px;
+}
+
+header p {
+  font-size: 18px;
+  color: #fff;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ABOUT US */
+section.about {
+  background: rgba(255,255,255,0.05);
+  margin: 30px auto;
+  max-width: 800px;
+  padding: 25px;
+  border-radius: 15px;
+  text-align: center;
+}
+
+section.about h2 {
+  color: #ff4d4d;
+  margin-bottom: 15px;
+}
+
+section.about p {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* PLAYER BUTTON */
+section.buttons {
+  text-align: center;
+  margin: 30px 0;
+}
+
+.buttons a {
+  background: linear-gradient(90deg, #ff0000, #aa0000);
+  padding: 15px 30px;
+  color: white;
+  text-decoration: none;
+  border-radius: 10px;
+  font-weight: bold;
+  margin: 0 10px;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.buttons a:hover {
+  background: linear-gradient(90deg, #ff4d4d, #ff1a1a);
+}
+
+/* CONTACT */
+section.contact {
+  background: rgba(255,255,255,0.05);
+  margin: 30px auto 50px auto;
+  max-width: 800px;
+  padding: 25px;
+  border-radius: 15px;
+  text-align: center;
+}
+
+section.contact h2 {
+  color: #ff4d4d;
+  margin-bottom: 15px;
+}
+
+section.contact p {
+  font-size: 16px;
+  color: #fff;
+}
+</style>
 </head>
 
 <body>
 
+<!-- NAVBAR -->
+<nav>
+  <div class="logo">VOID 7 ESPORTS</div>
+  <div class="nav-links">
+    <a href="index.html" class="active">Home</a>
+    <a href="players.html">Player Stats</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</nav>
+
+<!-- HEADER -->
 <header>
   <h1>VOID 7 ESPORTS</h1>
-  <p>Professional Esports Organisation from Kashmir, India</p>
+  <p>Professional Esports Organisation from Kashmir, India. Competing in BGMI with a vision to reach the global stage.</p>
 </header>
 
-<section>
-  <div class="card">
-    <h2>About Us</h2>
-    <p>
-      VOID 7 Esports represents Kashmiri talent in competitive esports.
-      Currently competing in BGMI with a vision to reach the global stage.
-    </p>
-  </div>
-
-  <div class="card">
-    <h2>Main Roster</h2>
-    <p>V7 | LUFFY • V7 | VIEL • V7 | GOD • V7 | RUNE</p>
-  </div>
-
-  <div class="buttons">
-  <a href="#" class="btn">View Our Jersey</a>
-  <a href="players.html" class="btn secondary">Player Stats</a>
-  </div>
+<!-- ABOUT US -->
+<section class="about">
+  <h2>About Us</h2>
+  <p>VOID 7 Esports represents Kashmiri talent in competitive esports. Our team is dedicated, skilled, and ready to compete at the highest level. Currently focused on BGMI tournaments and scrims to dominate the esports arena.</p>
 </section>
 
-<footer>
-  © 2026 VOID 7 Esports
-</footer>
+<!-- PLAYER BUTTON -->
+<section class="buttons">
+  <a href="players.html">Player Stats</a>
+</section>
+
+<!-- CONTACT -->
+<section class="contact">
+  <h2>Contact Us</h2>
+  <p>Email: <a href="mailto:darmumin52@gmail.com" style="color: red; text-decoration: none;">darmumin52@gmail.com</a></p>
+</section>
 
 </body>
 </html>
