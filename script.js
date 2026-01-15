@@ -4,12 +4,14 @@ let topFragger = null;
 let mvp = null;
 
 players.forEach(player => {
-  const kills = parseInt(player.dataset.kills);
-  const damage = parseInt(player.dataset.damage);
+  const kills = Number(player.dataset.kills);
+  const damage = Number(player.dataset.damage);
 
-  if (!topFragger ||
-     kills > topFragger.kills ||
-    (kills === topFragger.kills && damage > topFragger.damage)) {
+  if (
+    !topFragger ||
+    kills > topFragger.kills ||
+    (kills === topFragger.kills && damage > topFragger.damage)
+  ) {
     topFragger = { player, kills, damage };
   }
 
