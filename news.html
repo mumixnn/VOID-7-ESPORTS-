@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VOID 7 ESPORTS | Latest News</title>
+<title>VOID 7 ESPORTS | Esports News</title>
 
 <style>
 body {
@@ -16,57 +16,27 @@ body {
 
 h1 {
   color: red;
-  margin-top: 40px;
+  margin: 40px 0 10px;
 }
 
-p.subtitle {
+p {
   opacity: 0.8;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
-.news-container {
+.news-box {
+  width: 95%;
   max-width: 900px;
   margin: auto;
-  padding: 0 20px 40px 20px;
-}
-
-.news-card {
-  background: rgba(255,0,0,0.15);
-  padding: 15px;
-  margin: 15px 0;
   border-radius: 15px;
-  text-align: left;
-  display: flex;
-  gap: 15px;
-  box-shadow: 0 0 20px rgba(255,0,0,0.25);
+  overflow: hidden;
+  box-shadow: 0 0 30px rgba(255,0,0,0.4);
 }
 
-.news-card img {
-  width: 120px;
-  height: 80px;
-  object-fit: cover;
-  border-radius: 10px;
-}
-
-.news-card div.content {
-  flex: 1;
-}
-
-.news-card h3 {
-  color: red;
-  margin: 0 0 5px;
-  font-size: 18px;
-}
-
-.news-card p.date {
-  font-size: 13px;
-  opacity: 0.7;
-  margin: 0 0 10px;
-}
-
-.news-card a {
-  color: white;
-  text-decoration: underline;
+iframe {
+  width: 100%;
+  height: 600px;
+  border: none;
 }
 
 .back-btn {
@@ -80,70 +50,25 @@ p.subtitle {
   font-weight: bold;
   font-size: 18px;
 }
+
+.back-btn:hover {
+  transform: scale(1.05);
+}
 </style>
 </head>
 
 <body>
 
-<h1>VOID 7 ESPORTS NEWS</h1>
-<p class="subtitle">Latest PUBG, BGMI, esports, and player news</p>
+<h1>GLOBAL ESPORTS & PUBG NEWS</h1>
+<p>Latest PUBG, BGMI, esports & player news (auto-updated)</p>
 
-<div class="news-container" id="news">
-Loading news...
+<div class="news-box">
+  <iframe 
+    src="https://news.google.com/search?q=PUBG%20esports%20players&hl=en-IN&gl=IN&ceid=IN:en">
+  </iframe>
 </div>
 
 <a href="index.html" class="back-btn">RETURN HOME</a>
-
-<script>
-// List of RSS feeds
-const feeds = [
-  "https://api.rss2json.com/v1/api.json?rss_url=https://esportsinsider.com/feed/",
-  "https://api.rss2json.com/v1/api.json?rss_url=https://dotesports.com/pubg/feed/"
-];
-
-const newsDiv = document.getElementById("news");
-let combinedNews = [];
-
-Promise.all(feeds.map(url => fetch(url).then(r => r.json())))
-  .then(results => {
-    results.forEach(feed => {
-      combinedNews = combinedNews.concat(feed.items);
-    });
-
-    // Filter for keywords: PUBG, BGMI, esports, player, tournament, roster
-    let filtered = combinedNews.filter(item =>
-      /pubg|bgmi|pubg mobile|playerunknown|esports|player|tournament|roster/i.test(item.title + item.content)
-    );
-
-    // If not enough, fill with general articles
-    if (filtered.length < 6) {
-      const remaining = combinedNews.filter(item => !filtered.includes(item));
-      filtered = filtered.concat(remaining);
-    }
-
-    // Show only 6 items max
-    filtered.slice(0,6).forEach(item => {
-      const card = document.createElement("div");
-      card.className = "news-card";
-
-      let imgMatch = item.content.match(/<img.*?src="(.*?)"/);
-      let imgSrc = imgMatch ? imgMatch[1] : "https://via.placeholder.com/120x80?text=Esports";
-
-      card.innerHTML = `
-        <img src="${imgSrc}" alt="News Image">
-        <div class="content">
-          <h3>${item.title}</h3>
-          <p class="date">${item.pubDate.split(" ")[0]}</p>
-          <a href="${item.link}" target="_blank">Read Full News</a>
-        </div>
-      `;
-      newsDiv.appendChild(card);
-    });
-  })
-  .catch(() => {
-    newsDiv.innerText = "Failed to load news. Please refresh.";
-  });
-</script>
 
 </body>
 </html>
