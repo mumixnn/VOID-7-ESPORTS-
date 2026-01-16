@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VOID 7 ESPORTS | PUBG & BGMI News</title>
+<title>VOID 7 ESPORTS | Latest News</title>
 
 <style>
 body {
@@ -85,8 +85,8 @@ p.subtitle {
 
 <body>
 
-<h1>PUBG & BGMI GLOBAL NEWS</h1>
-<p class="subtitle">Latest news about PUBG & BGMI esports</p>
+<h1>VOID 7 ESPORTS NEWS</h1>
+<p class="subtitle">Latest PUBG, BGMI, esports, and player news</p>
 
 <div class="news-container" id="news">
 Loading news...
@@ -95,34 +95,39 @@ Loading news...
 <a href="index.html" class="back-btn">RETURN HOME</a>
 
 <script>
-// Fetch Esports Insider feed
-fetch("https://api.rss2json.com/v1/api.json?rss_url=https://esportsinsider.com/feed/")
-  .then(res => res.json())
-  .then(data => {
-    const newsDiv = document.getElementById("news");
-    newsDiv.innerHTML = "";
+// List of RSS feeds
+const feeds = [
+  "https://api.rss2json.com/v1/api.json?rss_url=https://esportsinsider.com/feed/",
+  "https://api.rss2json.com/v1/api.json?rss_url=https://dotesports.com/pubg/feed/"
+];
 
-    // Filter articles containing PUBG or BGMI
-    const filteredNews = data.items.filter(item => 
-      item.title.toLowerCase().includes("pubg") ||
-      item.content.toLowerCase().includes("pubg") ||
-      item.title.toLowerCase().includes("bgmi") ||
-      item.content.toLowerCase().includes("bgmi")
+const newsDiv = document.getElementById("news");
+let combinedNews = [];
+
+Promise.all(feeds.map(url => fetch(url).then(r => r.json())))
+  .then(results => {
+    results.forEach(feed => {
+      combinedNews = combinedNews.concat(feed.items);
+    });
+
+    // Filter for keywords: PUBG, BGMI, esports, player, tournament, roster
+    let filtered = combinedNews.filter(item =>
+      /pubg|bgmi|pubg mobile|playerunknown|esports|player|tournament|roster/i.test(item.title + item.content)
     );
 
-    if (filteredNews.length === 0) {
-      newsDiv.innerHTML = "<p>No PUBG or BGMI news today. Check back later!</p>";
-      return;
+    // If not enough, fill with general articles
+    if (filtered.length < 6) {
+      const remaining = combinedNews.filter(item => !filtered.includes(item));
+      filtered = filtered.concat(remaining);
     }
 
-    // Show up to 8 latest articles
-    filteredNews.slice(0,8).forEach(item => {
+    // Show only 6 items max
+    filtered.slice(0,6).forEach(item => {
       const card = document.createElement("div");
       card.className = "news-card";
 
-      // Try to get image from content
       let imgMatch = item.content.match(/<img.*?src="(.*?)"/);
-      let imgSrc = imgMatch ? imgMatch[1] : "https://via.placeholder.com/120x80?text=PUBG+BGMI";
+      let imgSrc = imgMatch ? imgMatch[1] : "https://via.placeholder.com/120x80?text=Esports";
 
       card.innerHTML = `
         <img src="${imgSrc}" alt="News Image">
@@ -136,8 +141,7 @@ fetch("https://api.rss2json.com/v1/api.json?rss_url=https://esportsinsider.com/f
     });
   })
   .catch(() => {
-    document.getElementById("news").innerText =
-      "Failed to load news. Please refresh.";
+    newsDiv.innerText = "Failed to load news. Please refresh.";
   });
 </script>
 
