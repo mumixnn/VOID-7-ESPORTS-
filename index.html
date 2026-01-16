@@ -17,22 +17,22 @@ body {
 
 /* HEADER + LOGO */
 header {
-  padding: 80px 20px 40px 20px;
+  padding: 100px 20px 60px 20px;
 }
 
 header img {
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   display: block;
-  margin: 0 auto 20px auto;
+  margin: 0 auto 25px auto;
   border-radius: 50%;
 }
 
 header h1 {
-  font-size: 50px;
+  font-size: 52px;
   color: red;
   letter-spacing: 2px;
-  margin: 0 0 20px 0;
+  margin: 0 0 25px 0;
 }
 
 header p {
@@ -42,48 +42,42 @@ header p {
   line-height: 1.6;
 }
 
-/* BUTTON SECTIONS */
-section.buttons,
-section.affiliate,
-section.donation {
-  margin: 30px 0;
+/* PLAYER STATS BUTTON */
+section.stats {
+  margin: 80px 0;
 }
 
-.buttons a,
-.affiliate a,
-.donation a {
+section.stats a {
   background: linear-gradient(90deg, #ff0000, #aa0000);
-  padding: 15px 35px;
+  padding: 25px 70px;
   color: white;
   text-decoration: none;
-  border-radius: 10px;
+  border-radius: 14px;
   font-weight: bold;
-  margin: 10px;
+  font-size: 24px;
   display: inline-block;
   transition: all 0.3s ease;
+  box-shadow: 0 0 25px rgba(255, 0, 0, 0.4);
 }
 
-.buttons a:hover,
-.affiliate a:hover,
-.donation a:hover {
+section.stats a:hover {
   background: linear-gradient(90deg, #ff4d4d, #ff1a1a);
-}
-
-/* TITLES */
-.affiliate h2,
-.donation h2,
-section.contact h2 {
-  color: #ff4d4d;
-  margin-bottom: 15px;
+  transform: scale(1.05);
+  box-shadow: 0 0 40px rgba(255, 0, 0, 0.6);
 }
 
 /* CONTACT SECTION */
 section.contact {
   background: rgba(255,255,255,0.05);
-  margin: 40px auto 60px auto;
+  margin: 80px auto 60px auto;
   max-width: 700px;
   padding: 25px;
   border-radius: 15px;
+}
+
+section.contact h2 {
+  color: #ff4d4d;
+  margin-bottom: 15px;
 }
 
 section.contact a {
@@ -106,25 +100,9 @@ section.contact a:hover {
   <p>Professional Esports Organisation from Kashmir. Competing in BGMI with a vision to reach the global stage.</p>
 </header>
 
-<!-- PLAYER STATS -->
-<section class="buttons">
-  <a href="players.html">Player Stats</a>
-</section>
-
-<!-- AFFILIATE -->
-<section class="affiliate">
-  <h2>Gaming Gear</h2>
-  <a href="https://www.amazon.in/dp/B09ABC123?tag=youraffiliateID" target="_blank">
-    Buy Gaming Gear
-  </a>
-</section>
-
-<!-- DONATION -->
-<section class="donation">
-  <h2>Support VOID 7 ESPORTS</h2>
-  <a href="https://www.buymeacoffee.com/Void7" target="_blank">
-    Donate / Buy Me a Coffee
-  </a>
+<!-- BIG CENTERED PLAYER STATS BUTTON -->
+<section class="stats">
+  <a href="players.html">VIEW PLAYER STATS</a>
 </section>
 
 <!-- CONTACT -->
