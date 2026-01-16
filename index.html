@@ -6,6 +6,11 @@
 <title>VOID 7 ESPORTS</title>
 
 <style>
+/* RESET */
+* {
+  box-sizing: border-box;
+}
+
 /* BODY */
 body {
   margin: 0;
@@ -15,101 +20,194 @@ body {
   text-align: center;
 }
 
-/* HEADER + LOGO */
+/* HEADER */
 header {
-  padding: 100px 20px 60px 20px;
+  padding: 100px 20px 60px;
 }
 
 header img {
   width: 120px;
   height: 120px;
-  display: block;
-  margin: 0 auto 25px auto;
   border-radius: 50%;
+  margin-bottom: 25px;
 }
 
 header h1 {
   font-size: 52px;
   color: red;
   letter-spacing: 2px;
-  margin: 0 0 25px 0;
+  margin-bottom: 20px;
 }
 
 header p {
   font-size: 18px;
-  max-width: 700px;
+  max-width: 750px;
   margin: 0 auto;
   line-height: 1.6;
 }
 
 /* PLAYER STATS BUTTON */
-section.stats {
+.stats {
   margin: 80px 0;
 }
 
-section.stats a {
-  background: linear-gradient(90deg, #ff0000, #aa0000);
+.stats a {
+  display: inline-block;
   padding: 25px 70px;
+  font-size: 24px;
+  font-weight: bold;
   color: white;
   text-decoration: none;
+  background: linear-gradient(90deg, #ff0000, #aa0000);
   border-radius: 14px;
-  font-weight: bold;
-  font-size: 24px;
-  display: inline-block;
+  box-shadow: 0 0 30px rgba(255,0,0,0.4);
   transition: all 0.3s ease;
-  box-shadow: 0 0 25px rgba(255, 0, 0, 0.4);
 }
 
-section.stats a:hover {
+.stats a:hover {
   background: linear-gradient(90deg, #ff4d4d, #ff1a1a);
   transform: scale(1.05);
-  box-shadow: 0 0 40px rgba(255, 0, 0, 0.6);
+  box-shadow: 0 0 45px rgba(255,0,0,0.6);
 }
 
-/* CONTACT SECTION */
-section.contact {
-  background: rgba(255,255,255,0.05);
-  margin: 80px auto 60px auto;
-  max-width: 700px;
+/* ABOUT US */
+.about {
+  max-width: 900px;
+  margin: 80px auto;
+  padding: 40px 25px;
+  background: rgba(0,0,0,0.35);
+  border-radius: 18px;
+}
+
+.about h2 {
+  font-size: 36px;
+  color: #ff4d4d;
+  margin-bottom: 20px;
+}
+
+.about p {
+  font-size: 17px;
+  line-height: 1.7;
+  margin-bottom: 40px;
+}
+
+.about-points {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+}
+
+.point {
+  background: rgba(255,0,0,0.08);
+  border: 1px solid rgba(255,0,0,0.3);
   padding: 25px;
   border-radius: 15px;
 }
 
-section.contact h2 {
+.point h3 {
+  color: red;
+  margin-bottom: 10px;
+}
+
+.point p {
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* CONTACT */
+.contact {
+  max-width: 700px;
+  margin: 80px auto 60px;
+  padding: 30px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 15px;
+}
+
+.contact h2 {
   color: #ff4d4d;
   margin-bottom: 15px;
 }
 
-section.contact a {
+.contact a {
   color: red;
   text-decoration: none;
 }
 
-section.contact a:hover {
+.contact a:hover {
   text-decoration: underline;
+}
+
+/* FOOTER */
+footer {
+  padding: 20px;
+  font-size: 14px;
+  opacity: 0.7;
 }
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
+<!-- HERO -->
 <header>
   <img src="logo.png" alt="VOID 7 ESPORTS Logo">
   <h1>VOID 7 ESPORTS</h1>
-  <p>Professional Esports Organisation from Kashmir. Competing in BGMI with a vision to reach the global stage.</p>
+  <p>
+    Professional esports organisation founded in Srinagar, Kashmir.
+    Competing in Battlegrounds Mobile India (BGMI) with a vision to grow
+    the esports ecosystem in the region.
+  </p>
 </header>
 
-<!-- BIG CENTERED PLAYER STATS BUTTON -->
+<!-- PLAYER STATS BUTTON -->
 <section class="stats">
   <a href="players.html">VIEW PLAYER STATS</a>
 </section>
 
+<!-- ABOUT US -->
+<section class="about">
+  <h2>About Us</h2>
+  <p>
+    <strong>VOID 7 ESPORTS (V7)</strong> is a professional esports organisation based in
+    Srinagar, Kashmir. The team currently competes in
+    <strong>Battlegrounds Mobile India (BGMI)</strong> and focuses on disciplined team play,
+    player development, and competitive excellence. V7 aims to represent Kashmir on
+    the national esports stage while contributing to the growth of esports culture
+    in the region.
+  </p>
+
+  <div class="about-points">
+    <div class="point">
+      <h3>Founded in Kashmir</h3>
+      <p>Established in Srinagar to highlight and develop esports talent from the region.</p>
+    </div>
+
+    <div class="point">
+      <h3>Competitive BGMI Roster</h3>
+      <p>Actively competing in BGMI with a focus on performance and professionalism.</p>
+    </div>
+
+    <div class="point">
+      <h3>Building Esports Culture</h3>
+      <p>Committed to growing and supporting the esports ecosystem in Kashmir.</p>
+    </div>
+  </div>
+</section>
+
 <!-- CONTACT -->
 <section class="contact">
-  <h2>Contact Us</h2>
-  <p>Instagram: <a href="https://instagram.com/Void7_esports" target="_blank">@Void7_esports</a></p>
+  <h2>Contact</h2>
+  <p>
+    Instagram:
+    <a href="https://instagram.com/Void7_esports" target="_blank">
+      @Void7_esports
+    </a>
+  </p>
 </section>
+
+<footer>
+  © 2026 VOID 7 ESPORTS
+</footer>
 
 </body>
 </html>
