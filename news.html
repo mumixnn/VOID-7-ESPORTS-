@@ -1,1 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VOID 7 ESPORTS | PUBG News</title>
 
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #0b0b0b, #440000);
+  color: white;
+  text-align: center;
+}
+
+h1 {
+  color: red;
+  margin-top: 40px;
+}
+
+p.subtitle {
+  opacity: 0.8;
+  margin-bottom: 30px;
+}
+
+.news-container {
+  max-width: 900px;
+  margin: auto;
+  padding: 0 20px 40px 20px;
+}
+
+.news-card {
+  background: rgba(255,0,0,0.15);
+  padding: 15px;
+  margin: 15px 0;
+  border-radius: 15px;
+  text-align: left;
+  display: flex;
+  gap: 15px;
+  box-shadow: 0 0 20px rgba(255,0,0,0.25);
+}
+
+.news-card img {
+  width: 120px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.news-card div.content {
+  flex: 1;
+}
+
+.news-card h3 {
+  color: red;
+  margin: 0 0 5px;
+  font-size: 18px;
+}
+
+.news-card p.date {
+  font-size: 13px;
+  opacity: 0.7;
+  margin: 0 0 10px;
+}
+
+.news-card a {
+  color: white;
+  text-decoration: underline;
+}
+
+.back-btn {
+  display: inline-block;
+  margin: 30px auto 60px;
+  padding: 15px 40px;
+  background: red;
+  color: white;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 18px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>PUBG / PUBGM GLOBAL NEWS</h1>
+<p class="subtitle">Latest official PUBG news from around the world</p>
+
+<div class="news-container" id="news">
+Loading news...
+</div>
+
+<a href="index.html" class="back-btn">RETURN HOME</a>
+
+<script>
+// fetch global PUBG news (Dot Esports PUBG feed)
+fetch("https://api.rss2json.com/v1/api.json?rss_url=https://dotesports.com/pubg/feed")
+  .then(res => res.json())
+  .then(data => {
+    const newsDiv = document.getElementById("news");
+    newsDiv.innerHTML = "";
+
+    data.items.slice(0, 8).forEach(item => {
+      const card = document.createElement("div");
+      card.className = "news-card";
+
+      let imgMatch = item.content.match(/<img.*?src="(.*?)"/);
+      let imgSrc = imgMatch ? imgMatch[1] : "https://via.placeholder.com/120x80?text=PUBG";
+
+      card.innerHTML = `
+        <img src="${imgSrc}" alt="News Image">
+        <div class="content">
+          <h3>${item.title}</h3>
+          <p class="date">${item.pubDate.split(" ")[0]}</p>
+          <a href="${item.link}" target="_blank">Read Full News</a>
+        </div>
+      `;
+      newsDiv.appendChild(card);
+    });
+  })
+  .catch(() => {
+    document.getElementById("news").innerText =
+      "Failed to load news. Please refresh.";
+  });
+</script>
+
+</body>
+</html>
