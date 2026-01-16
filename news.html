@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VOID 7 ESPORTS | PUBG News</title>
+<title>VOID 7 ESPORTS | PUBG & BGMI News</title>
 
 <style>
 body {
@@ -85,8 +85,8 @@ p.subtitle {
 
 <body>
 
-<h1>PUBG / PUBGM GLOBAL NEWS</h1>
-<p class="subtitle">Latest official PUBG news from around the world</p>
+<h1>PUBG & BGMI GLOBAL NEWS</h1>
+<p class="subtitle">Latest news about PUBG & BGMI esports</p>
 
 <div class="news-container" id="news">
 Loading news...
@@ -95,19 +95,34 @@ Loading news...
 <a href="index.html" class="back-btn">RETURN HOME</a>
 
 <script>
-// fetch global PUBG news (Dot Esports PUBG feed)
-fetch("https://api.rss2json.com/v1/api.json?rss_url=https://dotesports.com/pubg/feed")
+// Fetch Esports Insider feed
+fetch("https://api.rss2json.com/v1/api.json?rss_url=https://esportsinsider.com/feed/")
   .then(res => res.json())
   .then(data => {
     const newsDiv = document.getElementById("news");
     newsDiv.innerHTML = "";
 
-    data.items.slice(0, 8).forEach(item => {
+    // Filter articles containing PUBG or BGMI
+    const filteredNews = data.items.filter(item => 
+      item.title.toLowerCase().includes("pubg") ||
+      item.content.toLowerCase().includes("pubg") ||
+      item.title.toLowerCase().includes("bgmi") ||
+      item.content.toLowerCase().includes("bgmi")
+    );
+
+    if (filteredNews.length === 0) {
+      newsDiv.innerHTML = "<p>No PUBG or BGMI news today. Check back later!</p>";
+      return;
+    }
+
+    // Show up to 8 latest articles
+    filteredNews.slice(0,8).forEach(item => {
       const card = document.createElement("div");
       card.className = "news-card";
 
+      // Try to get image from content
       let imgMatch = item.content.match(/<img.*?src="(.*?)"/);
-      let imgSrc = imgMatch ? imgMatch[1] : "https://via.placeholder.com/120x80?text=PUBG";
+      let imgSrc = imgMatch ? imgMatch[1] : "https://via.placeholder.com/120x80?text=PUBG+BGMI";
 
       card.innerHTML = `
         <img src="${imgSrc}" alt="News Image">
