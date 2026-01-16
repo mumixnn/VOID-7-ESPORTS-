@@ -3,9 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Scrims Overview | VOID 7 ESPORTS</title>
+<title>VOID 7 ESPORTS</title>
 
 <style>
+/* RESET */
+* {
+  box-sizing: border-box;
+}
+
+/* BODY */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -15,180 +21,193 @@ body {
 }
 
 /* HEADER */
-h1 {
-  margin-top: 40px;
-  font-size: 40px;
-  color: #ff4d4d;
+header {
+  padding: 100px 20px 60px;
 }
 
-/* LAST UPDATED */
-.last-updated {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  border: 1px solid red;
-  padding: 10px 15px;
-  border-radius: 10px;
-  font-size: 14px;
+header img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin-bottom: 25px;
 }
 
-/* PLAYER CARD */
-.player {
-  background: rgba(255,255,255,0.05);
-  max-width: 520px;
-  margin: 30px auto;
-  padding: 25px;
+header h1 {
+  font-size: 52px;
+  color: red;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+}
+
+header p {
+  font-size: 18px;
+  max-width: 750px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* PLAYER STATS BUTTON */
+.stats {
+  margin: 80px 0;
+}
+
+.stats a {
+  display: inline-block;
+  padding: 25px 70px;
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  background: linear-gradient(90deg, #ff0000, #aa0000);
+  border-radius: 14px;
+  box-shadow: 0 0 30px rgba(255,0,0,0.4);
+  transition: all 0.3s ease;
+}
+
+.stats a:hover {
+  background: linear-gradient(90deg, #ff4d4d, #ff1a1a);
+  transform: scale(1.05);
+  box-shadow: 0 0 45px rgba(255,0,0,0.6);
+}
+
+/* ABOUT US */
+.about {
+  max-width: 900px;
+  margin: 80px auto;
+  padding: 40px 25px;
+  background: rgba(0,0,0,0.35);
   border-radius: 18px;
 }
 
-.player.mvp-card {
-  box-shadow: 0 0 25px gold;
-}
-
-.player img {
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  border: 3px solid red;
-}
-
-.player h2 {
-  color: red;
-  margin: 10px 0 5px;
-}
-
-/* BADGE */
-.badge {
-  display: inline-block;
-  padding: 6px 16px;
-  border-radius: 20px;
-  font-weight: bold;
-  margin: 10px 0;
-}
-
-.badge.mvp {
-  background: gold;
-  color: black;
-}
-
-.badge.top-fragger {
-  background: red;
-  color: white;
-}
-
-/* STATS */
-.stats {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 20px;
-}
-
-.stat h3 {
+.about h2 {
+  font-size: 36px;
   color: #ff4d4d;
-  margin-bottom: 5px;
+  margin-bottom: 20px;
 }
 
-.stat span {
-  font-size: 26px;
-  font-weight: bold;
+.about p {
+  font-size: 17px;
+  line-height: 1.7;
+  margin-bottom: 40px;
 }
 
-/* RETURN BUTTON */
-.return-home {
-  display: inline-block;
-  margin: 40px auto;
-  padding: 15px 35px;
-  background: linear-gradient(90deg, #ff0000, #aa0000);
-  color: white;
+.about-points {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+}
+
+.point {
+  background: rgba(255,0,0,0.08);
+  border: 1px solid rgba(255,0,0,0.3);
+  padding: 25px;
+  border-radius: 15px;
+}
+
+.point h3 {
+  color: red;
+  margin-bottom: 10px;
+}
+
+.point p {
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* CONTACT */
+.contact {
+  max-width: 700px;
+  margin: 80px auto 60px;
+  padding: 30px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 15px;
+}
+
+.contact h2 {
+  color: #ff4d4d;
+  margin-bottom: 15px;
+}
+
+.contact a {
+  color: red;
   text-decoration: none;
-  border-radius: 10px;
-  font-weight: bold;
+}
+
+.contact a:hover {
+  text-decoration: underline;
+}
+
+/* FOOTER */
+footer {
+  padding: 20px;
+  font-size: 14px;
+  opacity: 0.7;
 }
 </style>
 </head>
 
 <body>
 
-<div class="last-updated">
-  Last Updated<br>Date: 15 Jan 2026
-</div>
+<!-- HERO -->
+<header>
+  <img src="logo.png" alt="VOID 7 ESPORTS Logo">
+  <h1>VOID 7 ESPORTS</h1>
+  <p>
+    Professional esports organisation founded in Srinagar, Kashmir.
+    Competing in Battlegrounds Mobile India (BGMI) with a vision to grow
+    the esports ecosystem in the region.
+  </p>
+</header>
 
-<h1>Scrims Overview</h1>
+<!-- PLAYER STATS BUTTON -->
+<section class="stats">
+  <a href="players.html">VIEW PLAYER STATS</a>
+</section>
 
-<!-- PLAYER 1 -->
-<div class="player" data-kills="7" data-damage="787">
-  <img src="images/luffy.png">
-  <h2>V7 LUFFY</h2>
-  <div class="badge"></div>
+<!-- ABOUT US -->
+<section class="about">
+  <h2>About Us</h2>
+  <p>
+    <strong>VOID 7 ESPORTS (V7)</strong> is a professional esports organisation based in
+    Srinagar, Kashmir. The team currently competes in
+    <strong>Battlegrounds Mobile India (BGMI)</strong> and focuses on disciplined team play,
+    player development, and competitive excellence. V7 aims to represent Kashmir on
+    the national esports stage while contributing to the growth of esports culture
+    in the region.
+  </p>
 
-  <div class="stats">
-    <div class="stat">
-      <h3>Kills</h3>
-      <span class="count" data-value="7">0</span>
+  <div class="about-points">
+    <div class="point">
+      <h3>Founded in Kashmir</h3>
+      <p>Established in Srinagar to highlight and develop esports talent from the region.</p>
     </div>
-    <div class="stat">
-      <h3>Damage</h3>
-      <span class="count" data-value="787">0</span>
-    </div>
-  </div>
-</div>
 
-<!-- PLAYER 2 -->
-<div class="player" data-kills="7" data-damage="700">
-  <img src="images/viel.png">
-  <h2>V7 VIEL</h2>
-  <div class="badge"></div>
-
-  <div class="stats">
-    <div class="stat">
-      <h3>Kills</h3>
-      <span class="count" data-value="7">0</span>
+    <div class="point">
+      <h3>Competitive BGMI Roster</h3>
+      <p>Actively competing in BGMI with a focus on performance and professionalism.</p>
     </div>
-    <div class="stat">
-      <h3>Damage</h3>
-      <span class="count" data-value="700">0</span>
-    </div>
-  </div>
-</div>
 
-<!-- PLAYER 3 -->
-<div class="player" data-kills="7" data-damage="760">
-  <img src="images/god.png">
-  <h2>V7 GOD</h2>
-  <div class="badge"></div>
-
-  <div class="stats">
-    <div class="stat">
-      <h3>Kills</h3>
-      <span class="count" data-value="7">0</span>
-    </div>
-    <div class="stat">
-      <h3>Damage</h3>
-      <span class="count" data-value="760">0</span>
+    <div class="point">
+      <h3>Building Esports Culture</h3>
+      <p>Committed to growing and supporting the esports ecosystem in Kashmir.</p>
     </div>
   </div>
-</div>
+</section>
 
-<!-- PLAYER 4 -->
-<div class="player" data-kills="7" data-damage="734">
-  <img src="images/rune.png">
-  <h2>V7 RUNE</h2>
-  <div class="badge"></div>
+<!-- CONTACT -->
+<section class="contact">
+  <h2>Contact</h2>
+  <p>
+    Instagram:
+    <a href="https://instagram.com/Void7_esports" target="_blank">
+      @Void7_esports
+    </a>
+  </p>
+</section>
 
-  <div class="stats">
-    <div class="stat">
-      <h3>Kills</h3>
-      <span class="count" data-value="7">0</span>
-    </div>
-    <div class="stat">
-      <h3>Damage</h3>
-      <span class="count" data-value="734">0</span>
-    </div>
-  </div>
-</div>
+<footer>
+  © 2026 VOID 7 ESPORTS
+</footer>
 
-<a href="index.html" class="return-home">Return Home</a>
-
-<script src="script.js"></script>
 </body>
 </html>
