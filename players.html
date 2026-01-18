@@ -30,13 +30,14 @@ h1{
 /* FLIP CARD */
 .flip-card{
   perspective:1200px;
+  cursor:pointer;
 }
 
 .flip-inner{
   position:relative;
   width:100%;
   height:360px;
-  transition:transform 0.8s ease;
+  transition:transform 0.9s cubic-bezier(.4,.2,.2,1);
   transform-style:preserve-3d;
 }
 
@@ -44,6 +45,7 @@ h1{
   transform:rotateY(180deg);
 }
 
+/* FRONT & BACK */
 .card-front,
 .card-back{
   position:absolute;
@@ -74,14 +76,14 @@ h1{
 /* NAME */
 .player-name{
   color:red;
-  margin:15px 0 8px;
+  margin:15px 0 6px;
 }
 
 /* BADGES */
 .badges{
   display:flex;
   gap:10px;
-  margin-bottom:10px;
+  margin-bottom:12px;
 }
 
 .badge{
@@ -100,23 +102,23 @@ h1{
   background:red;
 }
 
-/* BUTTON */
-.stat-btn{
-  margin-top:10px;
-  padding:10px 20px;
-  border:none;
-  border-radius:10px;
-  background:linear-gradient(90deg,#ff0000,#aa0000);
-  color:white;
-  font-weight:bold;
-  cursor:pointer;
+/* HINT TEXT */
+.hint{
+  font-size:13px;
+  opacity:0.7;
 }
 
-/* STATS */
+/* STATS (LOCKED POSITIONS) */
 .stats{
-  display:flex;
-  justify-content:space-between;
+  display:grid;
+  grid-template-columns:1fr 1fr;
   width:100%;
+}
+
+.stat{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
 }
 
 .stat span{
@@ -126,6 +128,7 @@ h1{
 
 .stat p{
   color:#ff4d4d;
+  margin:5px 0 0;
 }
 
 /* MVP GLOW */
@@ -149,7 +152,7 @@ h1{
           <img src="images/luffy.png">
           <h2 class="player-name">LUFFY</h2>
           <div class="badges"></div>
-          <button class="stat-btn">View Stats</button>
+          <div class="hint">Tap or swipe for stats</div>
         </div>
         <div class="card-back">
           <div class="stats">
@@ -175,7 +178,7 @@ h1{
           <img src="images/viel.png">
           <h2 class="player-name">VIEL</h2>
           <div class="badges"></div>
-          <button class="stat-btn">View Stats</button>
+          <div class="hint">Tap or swipe for stats</div>
         </div>
         <div class="card-back">
           <div class="stats">
@@ -201,7 +204,7 @@ h1{
           <img src="images/god.png">
           <h2 class="player-name">GOD</h2>
           <div class="badges"></div>
-          <button class="stat-btn">View Stats</button>
+          <div class="hint">Tap or swipe for stats</div>
         </div>
         <div class="card-back">
           <div class="stats">
@@ -227,7 +230,7 @@ h1{
           <img src="images/rune.png">
           <h2 class="player-name">RUNE</h2>
           <div class="badges"></div>
-          <button class="stat-btn">View Stats</button>
+          <div class="hint">Tap or swipe for stats</div>
         </div>
         <div class="card-back">
           <div class="stats">
@@ -248,82 +251,99 @@ h1{
 </div>
 
 <script>
-// =======================
-// AUTO MVP & TOP FRAGGER
-// =======================
+// ======================
+// AUTO MVP & FRAGGER
+// ======================
 const players = document.querySelectorAll(".player");
-
 let topFragger = null;
 let mvp = null;
 
 // Normalize names
-players.forEach(player=>{
-  const nameEl = player.querySelector(".player-name");
-  nameEl.textContent = "V7 " + nameEl.textContent.trim();
+players.forEach(p=>{
+  const n = p.querySelector(".player-name");
+  n.textContent = "V7 " + n.textContent.trim();
 });
 
 // Decide MVP & Top Fragger
-players.forEach(player=>{
-  const kills = +player.dataset.kills;
-  const damage = +player.dataset.damage;
+players.forEach(p=>{
+  const k = +p.dataset.kills;
+  const d = +p.dataset.damage;
 
-  if(!topFragger || kills > topFragger.kills || (kills === topFragger.kills && damage > topFragger.damage)){
-    topFragger = {player,kills,damage};
+  if(!topFragger || k > topFragger.k || (k === topFragger.k && d > topFragger.d)){
+    topFragger = {player:p,k,d};
   }
-
-  if(!mvp || damage > mvp.damage){
-    mvp = {player,damage};
+  if(!mvp || d > mvp.d){
+    mvp = {player:p,d};
   }
 });
 
 // Apply badges
-players.forEach(player=>{
-  const badgeBox = player.querySelector(".badges");
-
-  if(player === mvp.player){
-    badgeBox.innerHTML += `<div class="badge mvp">MVP 👑</div>`;
-    player.classList.add("mvp-card");
+players.forEach(p=>{
+  const box = p.querySelector(".badges");
+  if(p === mvp.player){
+    box.innerHTML += `<div class="badge mvp">MVP 👑</div>`;
+    p.classList.add("mvp-card");
   }
-
-  if(player === topFragger.player){
-    badgeBox.innerHTML += `<div class="badge top-fragger">Top Fragger 💥</div>`;
+  if(p === topFragger.player){
+    box.innerHTML += `<div class="badge top-fragger">Top Fragger 💥</div>`;
   }
 });
 
-// Flip + counter animation
+// ======================
+// FLIP + SWIPE + DELAY
+// ======================
 players.forEach(player=>{
-  const flipCard = player.querySelector(".flip-card");
-  const btn = player.querySelector(".stat-btn");
+  const card = player.querySelector(".flip-card");
   const counters = player.querySelectorAll(".count");
   let animated = false;
+  let timer = null;
+  let startX = 0;
 
-  btn.addEventListener("click",()=>{
-    flipCard.classList.toggle("flipped");
+  card.addEventListener("click", flip);
 
-    if(!animated){
-      counters.forEach(counter=>{
-        animate(counter);
-      });
-      animated = true;
+  card.addEventListener("touchstart", e=>{
+    startX = e.touches[0].clientX;
+  });
+
+  card.addEventListener("touchend", e=>{
+    if(Math.abs(e.changedTouches[0].clientX - startX) > 50){
+      flip();
     }
   });
+
+  function flip(){
+    card.classList.toggle("flipped");
+
+    if(!animated && card.classList.contains("flipped")){
+      counters.forEach(c=>animate(c));
+      animated = true;
+    }
+
+    clearTimeout(timer);
+    if(card.classList.contains("flipped")){
+      timer = setTimeout(()=>{
+        card.classList.remove("flipped");
+      },3000);
+    }
+  }
 });
 
-function animate(counter){
-  const target = +counter.dataset.value;
-  let current = 0;
+// Counter animation
+function animate(el){
+  const target = +el.dataset.value;
+  let cur = 0;
   const step = Math.ceil(target / 40);
 
-  function update(){
-    current += step;
-    if(current >= target){
-      counter.textContent = target;
+  function run(){
+    cur += step;
+    if(cur >= target){
+      el.textContent = target;
       return;
     }
-    counter.textContent = current;
-    requestAnimationFrame(update);
+    el.textContent = cur;
+    requestAnimationFrame(run);
   }
-  update();
+  run();
 }
 </script>
 
