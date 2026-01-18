@@ -1,92 +1,82 @@
-// ===== SELECT ALL PLAYER CARDS =====
+<script>
 const players = document.querySelectorAll(".player");
+
+// ===== MVP & TOP FRAGGER (UNCHANGED LOGIC) =====
 let topFragger = null;
 let mvp = null;
 
-// Add "V7" prefix to all player names
-players.forEach(player => {
-  const nameEl = player.querySelector(".player-name");
-  nameEl.textContent = "V7 " + nameEl.textContent.trim();
-});
+players.forEach(p => {
+  const kills = +p.dataset.kills;
+  const damage = +p.dataset.damage;
 
-// Determine Top Fragger and MVP
-players.forEach(player => {
-  const kills = +player.dataset.kills;
-  const damage = +player.dataset.damage;
-
-  // Top Fragger: highest kills, tie → highest damage
-  if (!topFragger || kills > topFragger.kills || (kills === topFragger.kills && damage > topFragger.damage)) {
-    topFragger = { player, kills, damage };
+  if (!topFragger ||
+      kills > topFragger.k ||
+      (kills === topFragger.k && damage > topFragger.d)) {
+    topFragger = { player: p, k: kills, d: damage };
   }
 
-  // MVP: highest damage
-  if (!mvp || damage > mvp.damage) {
-    mvp = { player, damage };
+  if (!mvp || damage > mvp.d) {
+    mvp = { player: p, d: damage };
   }
 });
 
-// Apply badges and MVP glow
-players.forEach(player => {
-  const badgeContainer = player.querySelector(".badges");
+players.forEach(p => {
+  const badgeBox = p.querySelector(".badges");
 
-  if (player === mvp.player) {
-    badgeContainer.innerHTML += `<div class="badge mvp">MVP 👑</div>`;
-    player.classList.add("mvp-card");
+  if (p === mvp.player) {
+    badgeBox.innerHTML += `<div class="badge mvp">MVP 👑</div>`;
+    p.classList.add("mvp-card");
   }
-
-  if (player === topFragger.player) {
-    badgeContainer.innerHTML += `<div class="badge top-fragger">Top Fragger 💥</div>`;
+  if (p === topFragger.player) {
+    badgeBox.innerHTML += `<div class="badge top-fragger">Top Fragger 💥</div>`;
   }
 });
 
-// Flip card + swipe + counter animation
+// ===== IMPROVED FLIP UX =====
 players.forEach(player => {
   const card = player.querySelector(".flip-card");
   const counters = player.querySelectorAll(".count");
-  let animated = false; // Animate counters only once
-  let timer = null;
+
+  let flipped = false;
+  let animPlayed = false;
+  let lock = false;
+  let autoBackTimer = null;
+
   let startX = 0;
+  let startY = 0;
 
-  // Click to flip
-  card.addEventListener("click", flip);
-
-  // Swipe detection (mobile)
-  card.addEventListener("touchstart", e => startX = e.touches[0].clientX);
-  card.addEventListener("touchend", e => {
-    if (Math.abs(e.changedTouches[0].clientX - startX) > 50) flip();
+  // TAP
+  card.addEventListener("click", () => {
+    triggerFlip();
   });
 
-  function flip() {
-    card.classList.toggle("flipped");
+  // SWIPE START
+  card.addEventListener("touchstart", e => {
+    const t = e.touches[0];
+    startX = t.clientX;
+    startY = t.clientY;
+  }, { passive: true });
+
+  // SWIPE END
+  card.addEventListener("touchend", e => {
+    const t = e.changedTouches[0];
+    const dx = Math.abs(t.clientX - startX);
+    const dy = Math.abs(t.clientY - startY);
+
+    // Swipe threshold (accurate, no accidental flip)
+    if (dx > 50 && dx > dy) {
+      triggerFlip();
+    }
+  });
+
+  function triggerFlip() {
+    if (lock) return;
+    lock = true;
+
+    flipped = !flipped;
+    card.classList.toggle("flipped", flipped);
 
     // Animate counters once
-    if (!animated && card.classList.contains("flipped")) {
+    if (flipped && !animPlayed) {
       counters.forEach(c => animateCounter(c));
-      animated = true;
-    }
-
-    // Auto flip back after 3 seconds
-    clearTimeout(timer);
-    if (card.classList.contains("flipped")) {
-      timer = setTimeout(() => card.classList.remove("flipped"), 3000);
-    }
-  }
-});
-
-// Counter animation function
-function animateCounter(el) {
-  const target = +el.dataset.value;
-  let current = 0;
-  const step = Math.ceil(target / 40);
-
-  function run() {
-    current += step;
-    if (current >= target) {
-      el.textContent = target;
-      return;
-    }
-    el.textContent = current;
-    requestAnimationFrame(run);
-  }
-  run();
-}
+      animPlayed = true;
