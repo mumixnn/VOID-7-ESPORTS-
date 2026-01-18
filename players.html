@@ -3,210 +3,219 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Scrims Overview | VOID 7 ESPORTS</title>
+<title>Player Stats | VOID 7 ESPORTS</title>
 
 <style>
-body {
-  margin: 0;
+body{
+  margin:0;
   font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #0b0b0b, #440000);
-  color: white;
-  text-align: center;
+  background: linear-gradient(135deg,#0b0b0b,#440000);
+  color:white;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
 }
 
-/* HEADER */
-h1 {
-  margin-top: 40px;
-  font-size: 40px;
-  color: #ff4d4d;
+/* CONTAINER */
+.container{
+  text-align:center;
 }
 
-/* LAST UPDATED */
-.last-updated {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  border: 1px solid red;
-  padding: 10px 15px;
-  border-radius: 10px;
-  font-size: 14px;
+/* TITLE */
+h1{
+  color:#ff4d4d;
+  margin-bottom:10px;
 }
 
-/* PLAYER CARD */
-.player {
+.tap{
+  font-size:14px;
+  opacity:0.8;
+  margin-bottom:20px;
+}
+
+/* FLIP CARD */
+.flip-card{
+  width:320px;
+  height:420px;
+  perspective:1200px;
+  margin:auto;
+}
+
+.flip-inner{
+  width:100%;
+  height:100%;
+  transition: transform 0.8s ease;
+  transform-style: preserve-3d;
+  cursor:pointer;
+}
+
+.flip-card.flipped .flip-inner{
+  transform: rotateY(180deg);
+}
+
+/* FRONT & BACK */
+.card-face{
+  position:absolute;
+  width:100%;
+  height:100%;
+  backface-visibility:hidden;
   background: rgba(255,255,255,0.05);
-  max-width: 520px;
-  margin: 30px auto;
-  padding: 25px;
-  border-radius: 18px;
+  border-radius:20px;
+  box-shadow:0 0 25px rgba(255,0,0,0.25);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  padding:25px;
 }
 
-.player.mvp-card {
-  box-shadow: 0 0 25px gold;
+.card-back{
+  transform: rotateY(180deg);
 }
 
-.player img {
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  border: 3px solid red;
+/* IMAGE */
+.card-face img{
+  width:110px;
+  height:110px;
+  border-radius:50%;
+  border:4px solid red;
 }
 
-.player h2 {
-  color: red;
-  margin: 10px 0 5px;
+/* NAME */
+.card-face h2{
+  color:red;
+  margin:15px 0 10px;
 }
 
-/* BADGE */
-.badge {
-  display: inline-block;
-  padding: 6px 16px;
-  border-radius: 20px;
-  font-weight: bold;
-  margin: 10px 0;
+/* BADGES */
+.badges{
+  display:flex;
+  gap:10px;
+  margin-top:10px;
 }
 
-.badge.mvp {
-  background: gold;
-  color: black;
+.badge{
+  padding:6px 14px;
+  border-radius:20px;
+  font-weight:bold;
+  font-size:13px;
 }
 
-.badge.top-fragger {
-  background: red;
-  color: white;
-}
+.mvp{ background:gold; color:black; }
+.fragger{ background:red; }
 
 /* STATS */
-.stats {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 20px;
+.stats{
+  display:flex;
+  justify-content:space-between;
+  width:100%;
+  margin-top:30px;
 }
 
-.stat h3 {
-  color: #ff4d4d;
-  margin-bottom: 5px;
+.stat h3{
+  color:#ff4d4d;
+  margin-bottom:5px;
 }
 
-.stat span {
-  font-size: 26px;
-  font-weight: bold;
-}
-
-/* RETURN BUTTON */
-.return-home {
-  display: inline-block;
-  margin: 40px auto;
-  padding: 15px 35px;
-  background: linear-gradient(90deg, #ff0000, #aa0000);
-  color: white;
-  text-decoration: none;
-  border-radius: 10px;
-  font-weight: bold;
+.stat span{
+  font-size:28px;
+  font-weight:bold;
 }
 </style>
 </head>
 
 <body>
 
-<div class="last-updated">
-  Last Updated<br>Date: 17 Jan 2026
-</div>
+<div class="container">
+  <h1>V7 VIEL</h1>
+  <div class="tap">Tap for details</div>
 
-<h1>Scrims Overview</h1>
+  <div class="flip-card" id="card">
+    <div class="flip-inner">
 
-<!-- PLAYER 1 -->
-<div class="player" data-kills="8" data-damage="1371">
-  <img src="images/luffy.png" alt="V7 Luffy">
-  <h2>V7 LUFFY</h2>
-  <div class="badge"></div>
+      <!-- FRONT -->
+      <div class="card-face card-front">
+        <img src="images/viel.png">
+        <h2>V7 VIEL</h2>
 
-  <div class="stats">
-    <div class="stat">
-      <h3>Kills</h3>
-      <span class="count" data-value="8">0</span>
-    </div>
-    <div class="stat">
-      <h3>Damage</h3>
-      <span class="count" data-value="1371">0</span>
-    </div>
-  </div>
-</div>
+        <div class="badges" id="badges"></div>
+      </div>
 
-<!-- PLAYER 2 -->
-<div class="player" data-kills="13" data-damage="2008">
-  <img src="images/viel.png" alt="V7 Viel">
-  <h2>V7 VIEL</h2>
-  <div class="badge"></div>
+      <!-- BACK -->
+      <div class="card-face card-back">
+        <div class="stats">
+          <div class="stat">
+            <h3>Kills</h3>
+            <span id="kills">0</span>
+          </div>
+          <div class="stat">
+            <h3>Damage</h3>
+            <span id="damage">0</span>
+          </div>
+        </div>
+      </div>
 
-  <div class="stats">
-    <div class="stat">
-      <h3>Kills</h3>
-      <span class="count" data-value="13">0</span>
-    </div>
-    <div class="stat">
-      <h3>Damage</h3>
-      <span class="count" data-value="2008">0</span>
     </div>
   </div>
 </div>
 
-<!-- PLAYER 3 -->
-<div class="player" data-kills="13" data-damage="2036">
-  <img src="images/god.png" alt="V7 God">
-  <h2>V7 GOD</h2>
-  <div class="badge"></div>
+<script>
+// ALL PLAYERS DATA (same as scrims page)
+const players = [
+  {name:"V7 LUFFY", kills:8, damage:1371},
+  {name:"V7 VIEL", kills:13, damage:2008},
+  {name:"V7 GOD", kills:13, damage:2036},
+  {name:"V7 RUNE", kills:7, damage:734},
+  {name:"V7 MYTH", kills:0, damage:0}
+];
 
-  <div class="stats">
-    <div class="stat">
-      <h3>Kills</h3>
-      <span class="count" data-value="13">0</span>
-    </div>
-    <div class="stat">
-      <h3>Damage</h3>
-      <span class="count" data-value="2036">0</span>
-    </div>
-  </div>
-</div>
+// CURRENT PLAYER
+const current = players.find(p => p.name === "V7 VIEL");
 
-<!-- PLAYER 4 -->
-<div class="player" data-kills="7" data-damage="734">
-  <img src="images/rune.png" alt="V7 Rune">
-  <h2>V7 RUNE</h2>
-  <div class="badge"></div>
+// AUTO TITLES
+const maxKills = Math.max(...players.map(p=>p.kills));
+const maxDamage = Math.max(...players.map(p=>p.damage));
 
-  <div class="stats">
-    <div class="stat">
-      <h3>Kills</h3>
-      <span class="count" data-value="7">0</span>
-    </div>
-    <div class="stat">
-      <h3>Damage</h3>
-      <span class="count" data-value="734">0</span>
-    </div>
-  </div>
-</div>
+const badgeBox = document.getElementById("badges");
 
-<!-- PLAYER 5 -->
-<div class="player" data-kills="0" data-damage="0">
-  <img src="images/myth.png" alt="V7 Myth">
-  <h2>V7 MYTH</h2>
-  <div class="badge"></div>
+if(current.damage === maxDamage){
+  badgeBox.innerHTML += `<div class="badge mvp">MVP 👑</div>`;
+}
+if(current.kills === maxKills){
+  badgeBox.innerHTML += `<div class="badge fragger">Top Fragger 💥</div>`;
+}
 
-  <div class="stats">
-    <div class="stat">
-      <h3>Kills</h3>
-      <span class="count" data-value="0">0</span>
-    </div>
-    <div class="stat">
-      <h3>Damage</h3>
-      <span class="count" data-value="0">0</span>
-    </div>
-  </div>
-</div>
+// FLIP + COUNT
+const card = document.getElementById("card");
+let animated = false;
 
-<a href="index.html" class="return-home">Return Home</a>
+card.addEventListener("click", ()=>{
+  card.classList.toggle("flipped");
 
-<script src="script.js"></script>
+  if(!animated){
+    animate("kills", current.kills, 800);
+    animate("damage", current.damage, 1200);
+    animated = true;
+  }
+});
+
+// COUNT ANIMATION
+function animate(id, value, duration){
+  let start = 0;
+  const el = document.getElementById(id);
+  const step = Math.ceil(value / (duration/16));
+
+  const timer = setInterval(()=>{
+    start += step;
+    if(start >= value){
+      start = value;
+      clearInterval(timer);
+    }
+    el.textContent = start;
+  },16);
+}
+</script>
+
 </body>
 </html>
