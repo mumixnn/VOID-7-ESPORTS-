@@ -1,120 +1,83 @@
-// ======================
-// SELECT PLAYERS
-// ======================
+// ===== SELECT PLAYERS =====
 const players = document.querySelectorAll(".player");
-
 let topFragger = null;
 let mvp = null;
 
-// ======================
-// FORCE V7 NAME FORMAT
-// ======================
-players.forEach(player => {
-  const nameEl = player.querySelector(".player-name");
-  if (!nameEl) return;
-
-  let name = nameEl.textContent.trim();
-  name = name.replace(/^V7\s*/i, ""); // avoid double V7
-  nameEl.textContent = `V7 ${name}`;
+// Prefix names with V7
+players.forEach(p => {
+  const nameEl = p.querySelector(".player-name");
+  nameEl.textContent = "V7 " + nameEl.textContent.trim();
 });
 
-// ======================
-// AUTO MVP & TOP FRAGGER
-// ======================
-players.forEach(player => {
-  const kills = parseInt(player.dataset.kills);
-  const damage = parseInt(player.dataset.damage);
+// Determine Top Fragger & MVP
+players.forEach(p => {
+  const kills = +p.dataset.kills;
+  const damage = +p.dataset.damage;
 
-  // Top Fragger (kills → damage tie breaker)
-  if (
-    !topFragger ||
-    kills > topFragger.kills ||
-    (kills === topFragger.kills && damage > topFragger.damage)
-  ) {
-    topFragger = { player, kills, damage };
+  if (!topFragger || kills > topFragger.kills || (kills === topFragger.kills && damage > topFragger.damage)) {
+    topFragger = { player: p, kills, damage };
   }
 
-  // MVP (highest damage)
   if (!mvp || damage > mvp.damage) {
-    mvp = { player, damage };
+    mvp = { player: p, damage };
   }
 });
 
 // Apply badges
-players.forEach(player => {
-  const badgeBox = player.querySelector(".badges");
-
-  if (player === mvp.player) {
-    badgeBox.innerHTML += `<div class="badge mvp">MVP 👑</div>`;
-    player.classList.add("mvp-card");
+players.forEach(p => {
+  const badgeContainer = p.querySelector(".badges");
+  if (p === mvp.player) {
+    badgeContainer.innerHTML += `<div class="badge mvp">MVP 👑</div>`;
+    p.classList.add("mvp-card");
   }
-
-  if (player === topFragger.player) {
-    badgeBox.innerHTML += `<div class="badge top-fragger">Top Fragger 💥</div>`;
+  if (p === topFragger.player) {
+    badgeContainer.innerHTML += `<div class="badge top-fragger">Top Fragger 💥</div>`;
   }
 });
 
-// ======================
-// FLIP + TAP + SWIPE + AUTO BACK
-// ======================
-players.forEach(player => {
-  const card = player.querySelector(".flip-card");
-  const counters = player.querySelectorAll(".count");
-
+// Flip + swipe + auto back + counter animation
+players.forEach(p => {
+  const card = p.querySelector(".flip-card");
+  const counters = p.querySelectorAll(".count");
   let animated = false;
-  let autoFlipTimer = null;
+  let timer = null;
   let startX = 0;
 
-  // TAP TO FLIP
-  card.addEventListener("click", handleFlip);
-
-  // SWIPE TO FLIP (MOBILE)
-  card.addEventListener("touchstart", e => {
-    startX = e.touches[0].clientX;
-  });
-
+  card.addEventListener("click", flip);
+  card.addEventListener("touchstart", e => startX = e.touches[0].clientX);
   card.addEventListener("touchend", e => {
-    const endX = e.changedTouches[0].clientX;
-    if (Math.abs(endX - startX) > 50) {
-      handleFlip();
-    }
+    if (Math.abs(e.changedTouches[0].clientX - startX) > 50) flip();
   });
 
-  function handleFlip() {
+  function flip() {
     card.classList.toggle("flipped");
 
-    // Animate stats only once
     if (!animated && card.classList.contains("flipped")) {
-      counters.forEach(counter => animateCounter(counter));
+      counters.forEach(c => animateCounter(c));
       animated = true;
     }
 
-    // Auto flip back
-    clearTimeout(autoFlipTimer);
+    clearTimeout(timer);
     if (card.classList.contains("flipped")) {
-      autoFlipTimer = setTimeout(() => {
-        card.classList.remove("flipped");
-      }, 3000); // ⏱ delay
+      timer = setTimeout(() => card.classList.remove("flipped"), 3000);
     }
   }
 });
 
-// ======================
-// COUNTER ANIMATION
-// ======================
-function animateCounter(counter) {
-  const target = +counter.dataset.value;
-  let current = 0;
+// Counter animation function
+function animateCounter(el) {
+  const target = +el.dataset.value;
+  let cur = 0;
   const step = Math.ceil(target / 40);
 
-  function update() {
-    current += step;
-    if (current >= target) {
-      counter.textContent = target;
+  function run() {
+    cur += step;
+    if (cur >= target) {
+      el.textContent = target;
       return;
     }
-    counter.textContent = current;
-    requestAnimationFrame(update);
+    el.textContent = cur;
+    requestAnimationFrame(run);
   }
-  update();
+  run();
 }
