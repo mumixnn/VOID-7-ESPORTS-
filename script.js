@@ -1,29 +1,31 @@
-// Select all player cards
+// ======================
+// SELECT PLAYERS
+// ======================
 const players = document.querySelectorAll(".player");
 
 let topFragger = null;
 let mvp = null;
 
-// Force strict V7 | Name
+// ======================
+// FORCE V7 NAME FORMAT
+// ======================
 players.forEach(player => {
   const nameEl = player.querySelector(".player-name");
-  if (nameEl) {
-    let name = nameEl.textContent.trim();
+  if (!nameEl) return;
 
-    // Remove existing V7 prefix if already present
-    name = name.replace(/^V7\s*\|\s*/i, "");
-
-    // Apply strict format
-    nameEl.textContent = `V7 | ${name}`;
-  }
+  let name = nameEl.textContent.trim();
+  name = name.replace(/^V7\s*/i, ""); // avoid double V7
+  nameEl.textContent = `V7 ${name}`;
 });
 
-// Decide MVP & Top Fragger
+// ======================
+// AUTO MVP & TOP FRAGGER
+// ======================
 players.forEach(player => {
   const kills = parseInt(player.dataset.kills);
   const damage = parseInt(player.dataset.damage);
 
-  // Top Fragger: highest kills, tie → highest damage
+  // Top Fragger (kills → damage tie breaker)
   if (
     !topFragger ||
     kills > topFragger.kills ||
@@ -32,42 +34,87 @@ players.forEach(player => {
     topFragger = { player, kills, damage };
   }
 
-  // MVP: highest damage
+  // MVP (highest damage)
   if (!mvp || damage > mvp.damage) {
     mvp = { player, damage };
   }
 });
 
 // Apply badges
-if (topFragger) {
-  const badge = topFragger.player.querySelector(".badge");
-  badge.textContent = "TOP FRAGGER";
-  badge.classList.add("top-fragger");
-}
+players.forEach(player => {
+  const badgeBox = player.querySelector(".badges");
 
-if (mvp) {
-  const badge = mvp.player.querySelector(".badge");
-  badge.textContent = "MVP";
-  badge.classList.add("mvp");
-  mvp.player.classList.add("mvp-card");
-}
+  if (player === mvp.player) {
+    badgeBox.innerHTML += `<div class="badge mvp">MVP 👑</div>`;
+    player.classList.add("mvp-card");
+  }
 
-// Animated stat counters
-const counters = document.querySelectorAll(".count");
+  if (player === topFragger.player) {
+    badgeBox.innerHTML += `<div class="badge top-fragger">Top Fragger 💥</div>`;
+  }
+});
 
-counters.forEach(counter => {
+// ======================
+// FLIP + TAP + SWIPE + AUTO BACK
+// ======================
+players.forEach(player => {
+  const card = player.querySelector(".flip-card");
+  const counters = player.querySelectorAll(".count");
+
+  let animated = false;
+  let autoFlipTimer = null;
+  let startX = 0;
+
+  // TAP TO FLIP
+  card.addEventListener("click", handleFlip);
+
+  // SWIPE TO FLIP (MOBILE)
+  card.addEventListener("touchstart", e => {
+    startX = e.touches[0].clientX;
+  });
+
+  card.addEventListener("touchend", e => {
+    const endX = e.changedTouches[0].clientX;
+    if (Math.abs(endX - startX) > 50) {
+      handleFlip();
+    }
+  });
+
+  function handleFlip() {
+    card.classList.toggle("flipped");
+
+    // Animate stats only once
+    if (!animated && card.classList.contains("flipped")) {
+      counters.forEach(counter => animateCounter(counter));
+      animated = true;
+    }
+
+    // Auto flip back
+    clearTimeout(autoFlipTimer);
+    if (card.classList.contains("flipped")) {
+      autoFlipTimer = setTimeout(() => {
+        card.classList.remove("flipped");
+      }, 3000); // ⏱ delay
+    }
+  }
+});
+
+// ======================
+// COUNTER ANIMATION
+// ======================
+function animateCounter(counter) {
   const target = +counter.dataset.value;
   let current = 0;
-  const speed = target > 100 ? 25 : 40;
+  const step = Math.ceil(target / 40);
 
-  const update = () => {
-    const increment = Math.ceil(target / speed);
-    if (current < target) {
-      current += increment;
-      if (current > target) current = target;
-      counter.textContent = current;
-      requestAnimationFrame(update);
+  function update() {
+    current += step;
+    if (current >= target) {
+      counter.textContent = target;
+      return;
     }
-  };
+    counter.textContent = current;
+    requestAnimationFrame(update);
+  }
   update();
-});
+}
