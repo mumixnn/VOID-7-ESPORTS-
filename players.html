@@ -7,140 +7,140 @@
 
 <style>
 /* ===== BASE ===== */
-body{
-  margin:0;
+body {
+  margin: 0;
   font-family: Arial, sans-serif;
   background: linear-gradient(135deg,#0b0b0b,#440000);
-  color:white;
+  color: white;
 }
 
-h1{
-  text-align:center;
-  color:#ff4d4d;
-  margin:30px 0;
+h1 {
+  text-align: center;
+  color: #ff4d4d;
+  margin: 30px 0;
 }
 
-/* ===== CONTAINER (NO OVERLAP) ===== */
-.players-container{
-  display:flex;
-  flex-direction:column;
-  gap:30px;
-  padding:20px;
-  max-width:420px;
-  margin:auto;
+/* ===== CONTAINER ===== */
+.players-container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 20px;
+  max-width: 420px;
+  margin: auto;
 }
 
-/* ===== PLAYER WRAPPER ===== */
-.player{
-  position:relative;
+/* ===== PLAYER CARD ===== */
+.player {
+  position: relative;
 }
 
 /* ===== FLIP CARD ===== */
-.flip-card{
-  width:100%;
-  height:320px;
-  perspective:1200px;
-  cursor:pointer;
+.flip-card {
+  width: 100%;
+  height: 320px;
+  perspective: 1200px;
+  cursor: pointer;
 }
 
-.flip-inner{
-  width:100%;
-  height:100%;
-  position:relative;
-  transform-style:preserve-3d;
-  transition:transform 0.9s cubic-bezier(.4,.2,.2,1);
+.flip-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.9s cubic-bezier(.4,.2,.2,1);
 }
 
-.flip-card.flipped .flip-inner{
-  transform:rotateY(180deg);
+.flip-card.flipped .flip-inner {
+  transform: rotateY(180deg);
 }
 
 /* ===== CARD FACES ===== */
 .card-front,
-.card-back{
-  position:absolute;
-  inset:0;
-  backface-visibility:hidden;
-  background:rgba(255,255,255,0.06);
-  border-radius:18px;
-  padding:25px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
+.card-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  background: rgba(255,255,255,0.06);
+  border-radius: 18px;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.card-back{
-  transform:rotateY(180deg);
+.card-back {
+  transform: rotateY(180deg);
 }
 
 /* ===== IMAGE ===== */
-.card-front img{
-  width:100px;
-  height:100px;
-  border-radius:50%;
-  border:4px solid red;
+.card-front img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 4px solid red;
 }
 
 /* ===== NAME ===== */
-.player-name{
-  color:red;
-  margin:12px 0 6px;
+.player-name {
+  color: red;
+  margin: 12px 0 6px;
 }
 
 /* ===== BADGES ===== */
-.badges{
-  display:flex;
-  gap:10px;
-  margin-bottom:10px;
+.badges {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
 }
 
-.badge{
-  padding:6px 14px;
-  border-radius:20px;
-  font-size:13px;
-  font-weight:bold;
+.badge {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: bold;
 }
 
-.mvp{
-  background:gold;
-  color:black;
+.mvp {
+  background: gold;
+  color: black;
 }
 
-.top-fragger{
-  background:red;
+.top-fragger {
+  background: red;
 }
 
 /* ===== HINT ===== */
-.hint{
-  font-size:13px;
-  opacity:0.7;
+.hint {
+  font-size: 13px;
+  opacity: 0.7;
 }
 
-/* ===== STATS (LOCKED POSITION) ===== */
-.stats{
-  width:100%;
-  display:grid;
-  grid-template-columns:1fr 1fr;
+/* ===== STATS ===== */
+.stats {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
-.stat{
-  text-align:center;
+.stat {
+  text-align: center;
 }
 
-.stat span{
-  font-size:30px;
-  font-weight:bold;
+.stat span {
+  font-size: 30px;
+  font-weight: bold;
 }
 
-.stat p{
-  margin:5px 0 0;
-  color:#ff4d4d;
+.stat p {
+  margin: 5px 0 0;
+  color: #ff4d4d;
 }
 
 /* ===== MVP GLOW ===== */
-.mvp-card{
-  box-shadow:0 0 30px gold;
+.mvp-card {
+  box-shadow: 0 0 30px gold;
 }
 </style>
 </head>
@@ -289,47 +289,50 @@ const players = document.querySelectorAll(".player");
 let topFragger = null;
 let mvp = null;
 
-// Prefix names with V7
-players.forEach(p => {
-  const nameEl = p.querySelector(".player-name");
+// Add "V7" prefix to all player names
+players.forEach(player => {
+  const nameEl = player.querySelector(".player-name");
   nameEl.textContent = "V7 " + nameEl.textContent.trim();
 });
 
-// Determine Top Fragger & MVP
-players.forEach(p => {
-  const kills = +p.dataset.kills;
-  const damage = +p.dataset.damage;
+// Determine Top Fragger and MVP
+players.forEach(player => {
+  const kills = +player.dataset.kills;
+  const damage = +player.dataset.damage;
 
   if (!topFragger || kills > topFragger.kills || (kills === topFragger.kills && damage > topFragger.damage)) {
-    topFragger = { player: p, kills, damage };
+    topFragger = { player, kills, damage };
   }
 
   if (!mvp || damage > mvp.damage) {
-    mvp = { player: p, damage };
+    mvp = { player, damage };
   }
 });
 
-// Apply badges
-players.forEach(p => {
-  const badgeContainer = p.querySelector(".badges");
-  if (p === mvp.player) {
+// Apply badges and MVP glow
+players.forEach(player => {
+  const badgeContainer = player.querySelector(".badges");
+
+  if (player === mvp.player) {
     badgeContainer.innerHTML += `<div class="badge mvp">MVP 👑</div>`;
-    p.classList.add("mvp-card");
+    player.classList.add("mvp-card");
   }
-  if (p === topFragger.player) {
+
+  if (player === topFragger.player) {
     badgeContainer.innerHTML += `<div class="badge top-fragger">Top Fragger 💥</div>`;
   }
 });
 
-// Flip + swipe + auto back + counter animation
-players.forEach(p => {
-  const card = p.querySelector(".flip-card");
-  const counters = p.querySelectorAll(".count");
+// Flip card + swipe detection + counter animation
+players.forEach(player => {
+  const card = player.querySelector(".flip-card");
+  const counters = player.querySelectorAll(".count");
   let animated = false;
   let timer = null;
   let startX = 0;
 
   card.addEventListener("click", flip);
+
   card.addEventListener("touchstart", e => startX = e.touches[0].clientX);
   card.addEventListener("touchend", e => {
     if (Math.abs(e.changedTouches[0].clientX - startX) > 50) flip();
@@ -353,16 +356,16 @@ players.forEach(p => {
 // Counter animation function
 function animateCounter(el) {
   const target = +el.dataset.value;
-  let cur = 0;
+  let current = 0;
   const step = Math.ceil(target / 40);
 
   function run() {
-    cur += step;
-    if (cur >= target) {
+    current += step;
+    if (current >= target) {
       el.textContent = target;
       return;
     }
-    el.textContent = cur;
+    el.textContent = current;
     requestAnimationFrame(run);
   }
   run();
