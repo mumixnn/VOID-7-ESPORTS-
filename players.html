@@ -156,7 +156,7 @@ h1{
     <div class="flip-card">
       <div class="flip-inner">
         <div class="card-front">
-          <img src="images/luffy.png">
+          <img src="images/luffy.png" alt="V7 Luffy">
           <h2 class="player-name">LUFFY</h2>
           <div class="badges"></div>
           <div class="hint">Tap or swipe for stats</div>
@@ -182,7 +182,7 @@ h1{
     <div class="flip-card">
       <div class="flip-inner">
         <div class="card-front">
-          <img src="images/viel.png">
+          <img src="images/viel.png" alt="V7 Viel">
           <h2 class="player-name">VIEL</h2>
           <div class="badges"></div>
           <div class="hint">Tap or swipe for stats</div>
@@ -208,7 +208,7 @@ h1{
     <div class="flip-card">
       <div class="flip-inner">
         <div class="card-front">
-          <img src="images/god.png">
+          <img src="images/god.png" alt="V7 God">
           <h2 class="player-name">GOD</h2>
           <div class="badges"></div>
           <div class="hint">Tap or swipe for stats</div>
@@ -229,58 +229,58 @@ h1{
     </div>
   </div>
 
-</div>
-
   <!-- PLAYER 4 -->
-<div class="player" data-kills="7" data-damage="734">
-  <div class="flip-card">
-    <div class="flip-inner">
-      <div class="card-front">
-        <img src="images/rune.png">
-        <h2 class="player-name">RUNE</h2>
-        <div class="badges"></div>
-        <div class="hint">Tap or swipe for stats</div>
-      </div>
-      <div class="card-back">
-        <div class="stats">
-          <div class="stat">
-            <span class="count" data-value="7">0</span>
-            <p>Kills</p>
-          </div>
-          <div class="stat">
-            <span class="count" data-value="734">0</span>
-            <p>Damage</p>
+  <div class="player" data-kills="7" data-damage="734">
+    <div class="flip-card">
+      <div class="flip-inner">
+        <div class="card-front">
+          <img src="images/rune.png" alt="V7 Rune">
+          <h2 class="player-name">RUNE</h2>
+          <div class="badges"></div>
+          <div class="hint">Tap or swipe for stats</div>
+        </div>
+        <div class="card-back">
+          <div class="stats">
+            <div class="stat">
+              <span class="count" data-value="7">0</span>
+              <p>Kills</p>
+            </div>
+            <div class="stat">
+              <span class="count" data-value="734">0</span>
+              <p>Damage</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- PLAYER 5 -->
-<div class="player" data-kills="0" data-damage="0">
-  <div class="flip-card">
-    <div class="flip-inner">
-      <div class="card-front">
-        <img src="images/myth.png">
-        <h2 class="player-name">MYTH</h2>
-        <div class="badges"></div>
-        <div class="hint">Tap or swipe for stats</div>
-      </div>
-      <div class="card-back">
-        <div class="stats">
-          <div class="stat">
-            <span class="count" data-value="0">0</span>
-            <p>Kills</p>
-          </div>
-          <div class="stat">
-            <span class="count" data-value="0">0</span>
-            <p>Damage</p>
+  <!-- PLAYER 5 -->
+  <div class="player" data-kills="0" data-damage="0">
+    <div class="flip-card">
+      <div class="flip-inner">
+        <div class="card-front">
+          <img src="images/myth.png" alt="V7 Myth">
+          <h2 class="player-name">MYTH</h2>
+          <div class="badges"></div>
+          <div class="hint">Tap or swipe for stats</div>
+        </div>
+        <div class="card-back">
+          <div class="stats">
+            <div class="stat">
+              <span class="count" data-value="0">0</span>
+              <p>Kills</p>
+            </div>
+            <div class="stat">
+              <span class="count" data-value="0">0</span>
+              <p>Damage</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+
 </div>
 
 <script>
@@ -289,83 +289,76 @@ const players = document.querySelectorAll(".player");
 let topFragger = null;
 let mvp = null;
 
-// Normalize names
-players.forEach(p=>{
-  const n = p.querySelector(".player-name");
-  n.textContent = "V7 " + n.textContent.trim();
+// Prefix names with V7
+players.forEach(p => {
+  const nameEl = p.querySelector(".player-name");
+  nameEl.textContent = "V7 " + nameEl.textContent.trim();
 });
 
-// Decide MVP & Top Fragger
-players.forEach(p=>{
-  const k = +p.dataset.kills;
-  const d = +p.dataset.damage;
+// Determine Top Fragger & MVP
+players.forEach(p => {
+  const kills = +p.dataset.kills;
+  const damage = +p.dataset.damage;
 
-  if(!topFragger || k > topFragger.k || (k === topFragger.k && d > topFragger.d)){
-    topFragger = {player:p,k,d};
+  if (!topFragger || kills > topFragger.kills || (kills === topFragger.kills && damage > topFragger.damage)) {
+    topFragger = { player: p, kills, damage };
   }
-  if(!mvp || d > mvp.d){
-    mvp = {player:p,d};
+
+  if (!mvp || damage > mvp.damage) {
+    mvp = { player: p, damage };
   }
 });
 
 // Apply badges
-players.forEach(p=>{
-  const box = p.querySelector(".badges");
-  if(p === mvp.player){
-    box.innerHTML += `<div class="badge mvp">MVP 👑</div>`;
+players.forEach(p => {
+  const badgeContainer = p.querySelector(".badges");
+  if (p === mvp.player) {
+    badgeContainer.innerHTML += `<div class="badge mvp">MVP 👑</div>`;
     p.classList.add("mvp-card");
   }
-  if(p === topFragger.player){
-    box.innerHTML += `<div class="badge top-fragger">Top Fragger 💥</div>`;
+  if (p === topFragger.player) {
+    badgeContainer.innerHTML += `<div class="badge top-fragger">Top Fragger 💥</div>`;
   }
 });
 
-// Flip + swipe + auto back
-players.forEach(player=>{
-  const card = player.querySelector(".flip-card");
-  const counters = player.querySelectorAll(".count");
+// Flip + swipe + auto back + counter animation
+players.forEach(p => {
+  const card = p.querySelector(".flip-card");
+  const counters = p.querySelectorAll(".count");
   let animated = false;
   let timer = null;
   let startX = 0;
 
   card.addEventListener("click", flip);
-
-  card.addEventListener("touchstart", e=>{
-    startX = e.touches[0].clientX;
+  card.addEventListener("touchstart", e => startX = e.touches[0].clientX);
+  card.addEventListener("touchend", e => {
+    if (Math.abs(e.changedTouches[0].clientX - startX) > 50) flip();
   });
 
-  card.addEventListener("touchend", e=>{
-    if(Math.abs(e.changedTouches[0].clientX - startX) > 50){
-      flip();
-    }
-  });
-
-  function flip(){
+  function flip() {
     card.classList.toggle("flipped");
 
-    if(!animated && card.classList.contains("flipped")){
-      counters.forEach(c=>animate(c));
+    if (!animated && card.classList.contains("flipped")) {
+      counters.forEach(c => animateCounter(c));
       animated = true;
     }
 
     clearTimeout(timer);
-    if(card.classList.contains("flipped")){
-      timer = setTimeout(()=>{
-        card.classList.remove("flipped");
-      },3000);
+    if (card.classList.contains("flipped")) {
+      timer = setTimeout(() => card.classList.remove("flipped"), 3000);
     }
   }
 });
 
-// Counter animation
-function animate(el){
+// Counter animation function
+function animateCounter(el) {
   const target = +el.dataset.value;
   let cur = 0;
   const step = Math.ceil(target / 40);
 
-  function run(){
+  function run() {
     cur += step;
-    if(cur >= target){
+    if (cur >= target) {
       el.textContent = target;
       return;
     }
