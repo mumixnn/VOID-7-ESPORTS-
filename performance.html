@@ -7,16 +7,16 @@
 
 <!-- Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<!-- Zoom / Pan plugin -->
+<!-- Zoom / Pan plugin for swipe & pinch -->
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.1.1/dist/chartjs-plugin-zoom.min.js"></script>
 
 <style>
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: radial-gradient(circle at top, #2b0000, #000);
-  color: #fff;
   min-height: 100vh;
+  background: radial-gradient(circle at top, #2b0000 0%, #000 70%);
+  color: #fff;
 }
 
 .page {
@@ -45,13 +45,13 @@ h1 {
   border-radius: 22px;
   padding: 18px;
   box-shadow: 0 0 35px rgba(255,0,0,0.35);
-  overflow-x: auto; /* Horizontal scroll container */
+  overflow-x: auto; /* horizontal scroll if needed */
 }
 
 .graph-wrapper {
   position: relative;
   width: 100%;
-  height: 280px; /* Fixed height for Chart.js */
+  height: 280px;
 }
 
 canvas {
@@ -80,7 +80,6 @@ canvas {
 }
 </style>
 </head>
-
 <body>
 
 <div class="page">
@@ -98,26 +97,33 @@ canvas {
   <button class="back-btn" onclick="history.back()">Back</button>
 </div>
 
+<!-- Hidden scrim data copied from scrim-history.html -->
+<div id="scrim-data" style="display:none">
+  <div class="scrim" data-date="19 Jan 2026" data-standing="9"></div>
+  <div class="scrim" data-date="18 Jan 2026" data-standing="10"></div>
+  <div class="scrim" data-date="17 Jan 2026" data-standing="5"></div>
+  <div class="scrim" data-date="16 Jan 2026" data-standing="15"></div>
+  <div class="scrim" data-date="15 Jan 2026" data-standing="16"></div>
+  <div class="scrim" data-date="13 Jan 2026" data-standing="1"></div>
+</div>
+
 <script>
-/* ================= SCRIM DATA ================= */
-const SCRIM_HISTORY = [
-  { date: "13 Jan 2026", standing: 1 },
-  { date: "15 Jan 2026", standing: 16 },
-  { date: "16 Jan 2026", standing: 15 },
-  { date: "17 Jan 2026", standing: 5 },
-  { date: "18 Jan 2026", standing: 10 },
-  { date: "19 Jan 2026", standing: 9 },
-  { date: "20 Jan 2026", standing: 7 },
-  { date: "21 Jan 2026", standing: 8 },
-  { date: "22 Jan 2026", standing: 6 },
-  { date: "23 Jan 2026", standing: 12 } // Add more freely
-];
+/* ===== READ SCRIM DATA DYNAMICALLY ===== */
+const scrimElements = document.querySelectorAll('#scrim-data .scrim');
+const SCRIM_HISTORY = Array.from(scrimElements)
+  .map(el => ({
+    date: el.dataset.date,
+    standing: parseInt(el.dataset.standing)
+  }))
+  // Sort by date if needed
+  .sort((a,b) => new Date(a.date) - new Date(b.date));
 
 const labels = SCRIM_HISTORY.map(s => s.date);
 const standings = SCRIM_HISTORY.map(s => s.standing);
 
-/* ================= CHART.JS ================= */
+/* ===== CREATE CHART ===== */
 const ctx = document.getElementById('performanceChart').getContext('2d');
+
 const chart = new Chart(ctx, {
   type: 'line',
   data: {
@@ -143,7 +149,7 @@ const chart = new Chart(ctx, {
         pan: {
           enabled: true,
           mode: 'x',
-          modifierKey: 'ctrl', // optional, only if you want ctrl+pan
+          overScaleMode: 'x',
         },
         zoom: {
           wheel: { enabled: true },
@@ -153,8 +159,6 @@ const chart = new Chart(ctx, {
       },
       tooltip: {
         backgroundColor: "#000",
-        borderColor: "#ff0000",
-        borderWidth: 1,
         titleColor: "#fff",
         bodyColor: "#fff"
       }
@@ -164,17 +168,12 @@ const chart = new Chart(ctx, {
         reverse: true,
         min: 1,
         max: 24,
-        ticks: {
-          stepSize: 5,
-          color: "#ccc"
-        },
-        grid: {
-          color: "rgba(255,255,255,0.1)"
-        }
+        ticks: { stepSize: 5, color:"#ccc" },
+        grid: { color:"rgba(255,255,255,0.1)" }
       },
       x: {
-        ticks: { color: "#ccc" },
-        grid: { display: false }
+        ticks: { color:"#ccc" },
+        grid: { display:false }
       }
     }
   }
