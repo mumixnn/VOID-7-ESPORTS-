@@ -1,92 +1,42 @@
-const players = document.querySelectorAll(".player");
+// ===== SELECT PLAYERS =====
+const players = document.querySelectorAll('.player');
 
-// ===== MVP & TOP FRAGGER =====
-let topFragger = null;
-let mvp = null;
-
-players.forEach(p => {
-  const kills = +p.dataset.kills;
-  const damage = +p.dataset.damage;
-
-  if (!topFragger ||
-      kills > topFragger.k ||
-      (kills === topFragger.k && damage > topFragger.d)) {
-    topFragger = { player: p, k: kills, d: damage };
-  }
-
-  if (!mvp || damage > mvp.d) {
-    mvp = { player: p, d: damage };
-  }
-});
-
-players.forEach(p => {
-  const badgeBox = p.querySelector(".badges");
-
-  if (p === mvp.player) {
-    badgeBox.innerHTML += `<div class="badge mvp">MVP 👑</div>`;
-    p.classList.add("mvp-card");
-  }
-  if (p === topFragger.player) {
-    badgeBox.innerHTML += `<div class="badge top-fragger">Top Fragger 💥</div>`;
-  }
-});
-
-// ===== FLIP CARDS + COUNTER ANIMATION =====
+// ===== TAP / SWIPE TO FLIP =====
 players.forEach(player => {
-  const flipInner = player.querySelector(".flip-inner");
-  const card = player.querySelector(".flip-card");
-  const counters = player.querySelectorAll(".count");
+  const card = player.querySelector('.flip-card');
+  const counters = player.querySelectorAll('.count');
 
-  let flipped = false;
-  let animPlayed = false;
-  let autoBackTimer = null;
-
+  let animated = false;
   let startX = 0;
-  let startY = 0;
 
-  // TAP
-  card.addEventListener("click", () => triggerFlip());
+  // TAP (CLICK)
+  card.addEventListener('click', flip);
 
   // SWIPE START
-  card.addEventListener("touchstart", e => {
-    const t = e.touches[0];
-    startX = t.clientX;
-    startY = t.clientY;
-  }, { passive: true });
+  card.addEventListener('touchstart', e => {
+    startX = e.touches[0].clientX;
+  });
 
   // SWIPE END
-  card.addEventListener("touchend", e => {
-    const t = e.changedTouches[0];
-    const dx = Math.abs(t.clientX - startX);
-    const dy = Math.abs(t.clientY - startY);
-
-    if (dx > 50 && dx > dy) {
-      triggerFlip();
+  card.addEventListener('touchend', e => {
+    const endX = e.changedTouches[0].clientX;
+    if (Math.abs(endX - startX) > 50) {
+      flip();
     }
   });
 
-  function triggerFlip() {
-    flipped = !flipped;
-    flipInner.classList.toggle("flipped", flipped);
+  function flip() {
+    card.classList.toggle('flipped');
 
-    // Animate counters only once
-    if (flipped && !animPlayed) {
-      counters.forEach(c => animateCounter(c));
-      animPlayed = true;
-    }
-
-    // Auto-flip back after 3 seconds
-    clearTimeout(autoBackTimer);
-    if (flipped) {
-      autoBackTimer = setTimeout(() => {
-        flipInner.classList.remove("flipped");
-        flipped = false;
-      }, 3000);
+    // Animate counters only first time
+    if (!animated && card.classList.contains('flipped')) {
+      counters.forEach(counter => animateCounter(counter));
+      animated = true;
     }
   }
 });
 
-// ===== COUNTER ANIMATION FUNCTION =====
+// ===== COUNTER ANIMATION =====
 function animateCounter(el) {
   const target = +el.dataset.value;
   let current = 0;
@@ -101,5 +51,6 @@ function animateCounter(el) {
     el.textContent = current;
     requestAnimationFrame(run);
   }
+
   run();
 }
