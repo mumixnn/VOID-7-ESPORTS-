@@ -13,9 +13,26 @@
 body {
   margin: 0;
   font-family: 'Segoe UI', Arial, sans-serif;
-  background: radial-gradient(circle at top, #2a0000, #0a0a0a 70%);
+  background:
+    radial-gradient(circle at top, #3a0000, #090909 70%);
   color: white;
   text-align: center;
+  overflow-x: hidden;
+}
+
+/* ================= ENTRY ANIMATION ================= */
+.fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.9s ease forwards;
+}
+
+.delay-1 { animation-delay: 0.2s; }
+.delay-2 { animation-delay: 0.4s; }
+.delay-3 { animation-delay: 0.6s; }
+
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* ================= HEADER ================= */
@@ -28,12 +45,13 @@ header img {
   height: 110px;
   border-radius: 50%;
   margin-bottom: 25px;
+  box-shadow: 0 0 25px rgba(255,0,0,0.6);
 }
 
 header h1 {
   font-size: 48px;
   letter-spacing: 3px;
-  color: #ff0000;
+  color: #ff2b2b;
   margin-bottom: 20px;
 }
 
@@ -47,7 +65,7 @@ header p {
 
 /* ================= BUTTON SECTION ================= */
 section.stats {
-  margin: 70px 0 30px;
+  margin: 70px 0 25px;
   display: flex;
   flex-direction: column;
   gap: 22px;
@@ -63,32 +81,53 @@ section.stats a {
   width: 85%;
   max-width: 380px;
   margin: 0 auto;
-  border-radius: 16px;
-  box-shadow: 0 10px 25px rgba(255,0,0,0.35);
-  transition: all 0.3s ease;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(255,0,0,0.45);
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Ripple effect */
+section.stats a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(255,255,255,0.35) 10%, transparent 11%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+section.stats a:active {
+  transform: scale(0.97);
 }
 
 section.stats a:hover {
-  transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 15px 35px rgba(255,0,0,0.55);
+  transform: translateY(-2px);
+  box-shadow: 0 18px 40px rgba(255,0,0,0.65);
 }
 
 /* ================= HINT ================= */
 .hint {
-  margin-top: 20px;
-  animation: hintFade 8s forwards;
+  margin-top: 25px;
+  opacity: 0.8;
 }
 
 .hint span {
   font-size: 13px;
-  color: #ff6b6b;
+  color: #ff7b7b;
   letter-spacing: 0.5px;
 }
 
 .hint .arrow {
   font-size: 22px;
   margin-top: 5px;
-  animation: bounce 1.5s infinite;
+  animation: bounce 1.4s infinite;
+}
+
+@keyframes bounce {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(7px); }
 }
 
 /* ================= CONTACT ================= */
@@ -96,8 +135,10 @@ section.contact {
   margin: 80px auto 50px;
   max-width: 600px;
   padding: 25px;
-  background: rgba(255,255,255,0.04);
-  border-radius: 18px;
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.12);
 }
 
 section.contact h2 {
@@ -106,7 +147,7 @@ section.contact h2 {
 }
 
 section.contact a {
-  color: #ff0000;
+  color: #ff2b2b;
   text-decoration: none;
   font-weight: 600;
 }
@@ -122,85 +163,42 @@ footer {
   opacity: 0.6;
 }
 
-/* ================= ANIMATIONS ================= */
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(6px); }
-}
-
-@keyframes hintFade {
-  0% { opacity: 1; }
-  70% { opacity: 1; }
-  100% { opacity: 0; }
-}
-
-@keyframes fadeInOut {
-  0%, 30% { opacity: 1; }
-  50%, 100% { opacity: 0.3; }
-}
-
 /* ================= REFRESH BUTTONS ================= */
-.refresh-btn {
+.refresh-btn, .refresh-btn2 {
   position: fixed;
   bottom: 20px;
-  left: 20px;
-  padding: 18px 25px;
-  font-size: 18px;
+  padding: 16px 22px;
+  font-size: 16px;
   font-weight: bold;
   border: 2px solid #ff0000;
-  background: rgba(255,0,0,0.15);
+  background: rgba(255,0,0,0.18);
   color: #ff0000;
   border-radius: 16px;
   cursor: pointer;
   box-shadow: 0 5px 15px rgba(255,0,0,0.3);
-  z-index: 999;
   transition: all 0.3s ease;
-  animation: fadeInOut 6s infinite;
 }
 
-.refresh-btn:hover {
-  background: rgba(255,0,0,0.35);
-  transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 10px 25px rgba(255,0,0,0.45);
-}
+.refresh-btn { left: 20px; }
+.refresh-btn2 { right: 20px; }
 
-/* Second refresh button - slightly offset, also animated */
-.refresh-btn2 {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  padding: 18px 25px;
-  font-size: 18px;
-  font-weight: bold;
-  border: 2px solid #ff0000;
-  background: rgba(255,0,0,0.15);
-  color: #ff0000;
-  border-radius: 16px;
-  cursor: pointer;
-  box-shadow: 0 5px 15px rgba(255,0,0,0.3);
-  z-index: 999;
-  transition: all 0.3s ease;
-  animation: fadeInOut 5s infinite; /* slightly different speed */
-}
-
+.refresh-btn:hover,
 .refresh-btn2:hover {
-  background: rgba(255,0,0,0.35);
-  transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 10px 25px rgba(255,0,0,0.45);
+  background: rgba(255,0,0,0.4);
+  transform: scale(1.05);
 }
 
-/* ================= MOBILE OPT ================= */
+/* ================= MOBILE ================= */
 @media (max-width: 480px) {
   header h1 { font-size: 40px; }
   section.stats a { font-size: 18px; }
-  .refresh-btn, .refresh-btn2 { padding: 14px 20px; font-size: 16px; }
 }
 </style>
 </head>
 
 <body>
 
-<header>
+<header class="fade-up">
   <img src="logo.png" alt="VOID 7 ESPORTS Logo">
   <h1>VOID 7 ESPORTS</h1>
   <p>
@@ -209,18 +207,18 @@ footer {
   </p>
 </header>
 
-<section class="stats">
+<section class="stats fade-up delay-1">
   <a href="players.html">VIEW PLAYER STATS</a>
   <a href="scrim-history.html">SCRIMS HISTORY</a>
-  <a href="nickname.html">V7 NICKNAME GENERATOR</a>
+  <a href="performance.html">PERFORMANCE GRAPH</a>
 </section>
 
-<div class="hint">
-  <span>Tap a section to continue</span>
+<div class="hint fade-up delay-2">
+  <span>Choose your battleground ⚔️</span>
   <div class="arrow">⬇</div>
 </div>
 
-<section class="contact">
+<section class="contact fade-up delay-3">
   <h2>Contact Us</h2>
   <p>
     Instagram:
@@ -234,9 +232,8 @@ footer {
   © 2026 VOID 7 ESPORTS. All Rights Reserved.
 </footer>
 
-<!-- ================= REFRESH BUTTONS ================= -->
-<button class="refresh-btn" onclick="location.reload()">🔄 Refresh</button>
-<button class="refresh-btn2" onclick="location.reload()">🔄 Refresh</button>
+<button class="refresh-btn" onclick="location.reload()">🔄</button>
+<button class="refresh-btn2" onclick="location.reload()">🔄</button>
 
 </body>
 </html>
