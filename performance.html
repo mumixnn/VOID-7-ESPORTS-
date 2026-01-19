@@ -1,68 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Performance Graph | VOID 7</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Performance Graph | VOID 7 ESPORTS</title>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
-body {
+/* ===== RESET ===== */
+* {
+  box-sizing: border-box;
   margin: 0;
+  padding: 0;
+}
+
+/* ===== BODY ===== */
+body {
   font-family: Arial, sans-serif;
-  min-height: 100vh;
-  background: radial-gradient(circle at top, #3b0000, #000);
+  background: radial-gradient(circle at top, #2b0000, #000);
   color: #fff;
+  min-height: 100vh;
 }
 
+/* ===== MAIN CONTAINER ===== */
 .container {
-  padding: 30px 16px 60px;
-  max-width: 900px;
-  margin: auto;
+  min-height: 100vh;
+  padding: 30px 16px;
+  display: flex;
+  flex-direction: column;
 }
 
+/* ===== HEADINGS ===== */
 h1 {
   text-align: center;
-  color: #ff1e1e;
-  margin-bottom: 6px;
-  letter-spacing: 1px;
+  color: #ff0000;
+  margin-bottom: 8px;
+  font-size: 32px;
 }
 
 .subtitle {
   text-align: center;
-  opacity: 0.85;
-  margin-bottom: 22px;
+  color: #ccc;
+  margin-bottom: 24px;
   font-size: 14px;
 }
 
+/* ===== GRAPH CARD ===== */
 .card {
-  background: linear-gradient(145deg, #140000, #1c0000);
-  border-radius: 18px;
-  padding: 20px 16px;
-  box-shadow: 0 0 25px rgba(255,0,0,0.15);
+  background: linear-gradient(145deg, rgba(255,0,0,0.08), rgba(0,0,0,0.9));
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 0 30px rgba(255,0,0,0.2);
 }
 
-canvas {
-  width: 100% !important;
-  height: 320px !important;
+/* ===== SPACER ===== */
+.spacer {
+  flex: 1;
 }
 
+/* ===== BACK BUTTON ===== */
 .back-btn {
-  display: block;
   margin: 30px auto 0;
-  padding: 14px 36px;
-  background: linear-gradient(135deg, #ff0000, #b30000);
-  color: white;
-  border-radius: 14px;
-  font-size: 18px;
+  padding: 14px 50px;
+  background: linear-gradient(145deg, #ff0000, #b00000);
+  color: #fff;
   border: none;
-  cursor: pointer;
+  border-radius: 16px;
+  font-size: 18px;
+  font-weight: bold;
   box-shadow: 0 0 20px rgba(255,0,0,0.6);
+  cursor: pointer;
 }
-
 .back-btn:active {
-  transform: scale(0.96);
+  transform: scale(0.95);
 }
 </style>
 </head>
@@ -71,18 +82,20 @@ canvas {
 
 <div class="container">
   <h1>Performance Graph</h1>
-  <div class="subtitle">Overall scrim standings (1 = WWCD)</div>
+  <div class="subtitle">Overall scrim standings (1 = best)</div>
 
   <div class="card">
     <canvas id="performanceChart"></canvas>
   </div>
 
+  <div class="spacer"></div>
+
   <button class="back-btn" onclick="history.back()">Back</button>
 </div>
 
 <script>
-/* ===== SCRIM DATA (AUTO GRAPH SOURCE) ===== */
-const scrims = [
+/* ===== SCRIM DATA (EDIT ONLY THIS) ===== */
+const SCRIM_HISTORY = [
   { date: "13 Jan 2026", standing: 1 },
   { date: "15 Jan 2026", standing: 16 },
   { date: "16 Jan 2026", standing: 15 },
@@ -91,49 +104,62 @@ const scrims = [
   { date: "19 Jan 2026", standing: 9 }
 ];
 
+/* ===== PREPARE DATA ===== */
+const labels = SCRIM_HISTORY.map(s => s.date);
+const standings = SCRIM_HISTORY.map(s => s.standing);
+
 /* ===== CHART ===== */
 new Chart(document.getElementById("performanceChart"), {
   type: "line",
   data: {
-    labels: scrims.map(s => s.date),
+    labels,
     datasets: [{
-      data: scrims.map(s => s.standing),
-      borderColor: "#ff2a2a",
-      backgroundColor: "rgba(255,0,0,0.08)",
-      borderWidth: 3,
-      tension: 0.35,
-      pointRadius: 5,
+      data: standings,
+      borderColor: "#ff0000",
+      backgroundColor: "rgba(255,0,0,0.15)",
+      tension: 0.4,
+      borderWidth: 4,
+      pointRadius: 6,
       pointBackgroundColor: "#fff",
       pointBorderColor: "#ff0000",
-      fill: false   // ❌ NO BLACK FILL
+      fill: false
     }]
   },
   options: {
     responsive: true,
     maintainAspectRatio: false,
-    plugins: {
-      legend: { display: false }
-    },
     scales: {
       y: {
         reverse: true,
         min: 1,
         max: 24,
         ticks: {
-          color: "#ffb3b3",
-          stepSize: 5
+          stepSize: 5,
+          color: "#ccc"
         },
         grid: {
-          color: "rgba(255,255,255,0.08)"
+          color: "rgba(255,255,255,0.1)"
         }
       },
       x: {
         ticks: {
-          color: "#ffb3b3"
+          color: "#ccc",
+          maxRotation: 30,
+          minRotation: 30
         },
         grid: {
           display: false
         }
+      }
+    },
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: "#000",
+        borderColor: "#ff0000",
+        borderWidth: 1,
+        titleColor: "#fff",
+        bodyColor: "#fff"
       }
     }
   }
