@@ -2,54 +2,128 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width initial-scale=1.0">
-<title>Performance | VOID 7</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Performance Graph | VOID 7 ESPORTS</title>
 
 <style>
-body {
+/* ================= GLOBAL ================= */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: radial-gradient(circle at top, #2a0000, #0a0a0a);
+  padding: 0;
+  min-height: 100%;
+}
+
+/* ================= BODY ================= */
+body {
+  min-height: 100vh;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: radial-gradient(circle at top, #2a0000 0%, #120000 40%, #050505 100%);
+  color: white;
+  display: flex;
+  justify-content: center;
+}
+
+/* ================= PAGE WRAPPER ================= */
+.page {
+  width: 100%;
+  max-width: 1000px;
+  min-height: 100vh;
+  padding-bottom: 60px;
+}
+
+/* ================= HEADER ================= */
+header {
+  text-align: center;
+  padding: 70px 20px 25px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 38px;
+  color: #ff1f1f;
+  letter-spacing: 2px;
+}
+
+header p {
+  margin-top: 10px;
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+/* ================= GRAPH CARD ================= */
+.graph-card {
+  width: 94%;
+  margin: 30px auto 40px;
+  padding: 25px 20px 30px;
+  background: rgba(255,255,255,0.07);
+  backdrop-filter: blur(14px);
+  border-radius: 22px;
+  border: 1px solid rgba(255,255,255,0.15);
+  box-shadow:
+    0 0 35px rgba(255,0,0,0.35),
+    inset 0 0 40px rgba(0,0,0,0.35);
+}
+
+/* ================= SVG ================= */
+svg {
+  width: 100%;
+  height: 320px;
+}
+
+/* ================= BACK BUTTON ================= */
+.back-btn {
+  display: block;
+  width: 160px;
+  margin: 0 auto;
+  padding: 14px 0;
+  background: linear-gradient(90deg, #ff0000, #a80000);
   color: white;
   text-align: center;
-}
-h1 { color: #ff2b2b; }
-.graph {
-  width: 95%;
-  max-width: 700px;
-  margin: 30px auto;
-  background: rgba(255,255,255,0.06);
-  padding: 20px;
-  border-radius: 16px;
-}
-svg { width: 100%; height: 300px; }
-.axis { stroke: rgba(255,255,255,0.3); }
-.line { fill: none; stroke: red; stroke-width: 3; }
-.dot { fill: red; stroke: white; stroke-width: 2; }
-.back {
-  display: inline-block;
-  margin: 20px;
-  padding: 12px 30px;
-  background: red;
-  color: white;
   text-decoration: none;
-  border-radius: 12px;
+  font-weight: bold;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(255,0,0,0.5);
+  transition: transform 0.2s ease;
+}
+
+.back-btn:active {
+  transform: scale(0.96);
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 480px) {
+  header h1 {
+    font-size: 32px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<h1>Performance Graph</h1>
+<div class="page">
 
-<div class="graph">
-  <svg viewBox="0 0 600 300"></svg>
+  <header>
+    <h1>Performance Graph</h1>
+    <p>Overall scrim standings (1 = best)</p>
+  </header>
+
+  <div class="graph-card">
+    <svg viewBox="0 0 600 300"></svg>
+  </div>
+
+  <a href="index.html" class="back-btn">Back</a>
+
 </div>
 
-<a href="index.html" class="back">Back</a>
-
-<!-- STEP 3 WILL LOAD DATA -->
+<!-- DATA SOURCE -->
 <script src="scrims-data.js"></script>
+
+<!-- GRAPH LOGIC -->
 <script src="performance.js"></script>
 
 </body>
