@@ -1,1 +1,368 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>V07 Players</title>
+
+<style>
+/* ===== BASE ===== */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #0b0b0b, #400000);
+  color: white;
+}
+
+h1 {
+  text-align: center;
+  color: #ff4d4d;
+  margin: 30px 0;
+}
+
+/* ===== CONTAINER ===== */
+.players-container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 20px;
+  max-width: 420px;
+  margin: auto;
+}
+
+/* ===== PLAYER CARD ===== */
+.player {
+  position: relative;
+}
+
+.flip-card {
+  width: 100%;
+  height: 320px;
+  perspective: 1200px;
+  cursor: pointer;
+}
+
+.flip-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.9s cubic-bezier(.4,.2,.2,1);
+}
+
+.flip-card.flipped .flip-inner {
+  transform: rotateY(180deg);
+}
+
+/* ===== CARD FACES ===== */
+.card-front,
+.card-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  background: rgba(255,255,255,0.06);
+  border-radius: 18px;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+}
+
+/* ===== IMAGE ===== */
+.card-front img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 4px solid red;
+}
+
+/* ===== NAME ===== */
+.player-name {
+  color: red;
+  margin: 12px 0 6px;
+}
+
+/* ===== BADGES ===== */
+.badges {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.badge {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.mvp {
+  background: gold;
+  color: black;
+}
+
+.top-fragger {
+  background: red;
+}
+
+/* ===== HINT ===== */
+.hint {
+  font-size: 13px;
+  opacity: 0.7;
+}
+
+/* ===== STATS ===== */
+.stats {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat span {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.stat p {
+  margin: 5px 0 0;
+  color: #ff4d4d;
+}
+
+/* ===== MVP GLOW ===== */
+.mvp-card {
+  box-shadow: 0 0 30px gold;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Scrims Overview</h1>
+
+<div class="players-container">
+
+  <!-- PLAYER 1 -->
+  <div class="player" data-kills="9" data-damage="1753">
+    <div class="flip-card">
+      <div class="flip-inner">
+        <div class="card-front">
+          <img src="images/luffy.png" alt="V7 Luffy">
+          <h2 class="player-name">LUFFY</h2>
+          <div class="badges"></div>
+          <div class="hint">Tap or swipe for stats</div>
+        </div>
+        <div class="card-back">
+          <div class="stats">
+            <div class="stat">
+              <span class="count" data-value="9">0</span>
+              <p>Kills</p>
+            </div>
+            <div class="stat">
+              <span class="count" data-value="1753">0</span>
+              <p>Damage</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLAYER 2 -->
+  <div class="player" data-kills="15" data-damage="2826">
+    <div class="flip-card">
+      <div class="flip-inner">
+        <div class="card-front">
+          <img src="images/viel.png" alt="V7 Viel">
+          <h2 class="player-name">VIEL</h2>
+          <div class="badges"></div>
+          <div class="hint">Tap or swipe for stats</div>
+        </div>
+        <div class="card-back">
+          <div class="stats">
+            <div class="stat">
+              <span class="count" data-value="15">0</span>
+              <p>Kills</p>
+            </div>
+            <div class="stat">
+              <span class="count" data-value="2826">0</span>
+              <p>Damage</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLAYER 3 -->
+  <div class="player" data-kills="14" data-damage="2408">
+    <div class="flip-card">
+      <div class="flip-inner">
+        <div class="card-front">
+          <img src="images/god.png" alt="V7 God">
+          <h2 class="player-name">GOD</h2>
+          <div class="badges"></div>
+          <div class="hint">Tap or swipe for stats</div>
+        </div>
+        <div class="card-back">
+          <div class="stats">
+            <div class="stat">
+              <span class="count" data-value="14">0</span>
+              <p>Kills</p>
+            </div>
+            <div class="stat">
+              <span class="count" data-value="2408">0</span>
+              <p>Damage</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLAYER 4 -->
+  <div class="player" data-kills="7" data-damage="734">
+    <div class="flip-card">
+      <div class="flip-inner">
+        <div class="card-front">
+          <img src="images/rune.png" alt="V7 Rune">
+          <h2 class="player-name">RUNE</h2>
+          <div class="badges"></div>
+          <div class="hint">Tap or swipe for stats</div>
+        </div>
+        <div class="card-back">
+          <div class="stats">
+            <div class="stat">
+              <span class="count" data-value="7">0</span>
+              <p>Kills</p>
+            </div>
+            <div class="stat">
+              <span class="count" data-value="734">0</span>
+              <p>Damage</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLAYER 5 -->
+  <div class="player" data-kills="0" data-damage="0">
+    <div class="flip-card">
+      <div class="flip-inner">
+        <div class="card-front">
+          <img src="images/myth.png" alt="V7 Myth">
+          <h2 class="player-name">MYTH</h2>
+          <div class="badges"></div>
+          <div class="hint">Tap or swipe for stats</div>
+        </div>
+        <div class="card-back">
+          <div class="stats">
+            <div class="stat">
+              <span class="count" data-value="0">0</span>
+              <p>Kills</p>
+            </div>
+            <div class="stat">
+              <span class="count" data-value="0">0</span>
+              <p>Damage</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const players = document.querySelectorAll(".player");
+let topFragger = null;
+let mvp = null;
+
+/* Add V7 prefix */
+players.forEach(p => {
+  const name = p.querySelector(".player-name");
+  name.textContent = "V7 " + name.textContent.trim();
+});
+
+/* Determine MVP & Top Fragger */
+players.forEach(p => {
+  const kills = +p.dataset.kills;
+  const damage = +p.dataset.damage;
+
+  if (!topFragger || kills > topFragger.kills ||
+     (kills === topFragger.kills && damage > topFragger.damage)) {
+    topFragger = { player: p, kills, damage };
+  }
+
+  if (!mvp || damage > mvp.damage) {
+    mvp = { player: p, damage };
+  }
+});
+
+/* Apply badges */
+players.forEach(p => {
+  const badgeBox = p.querySelector(".badges");
+
+  if (p === mvp.player) {
+    badgeBox.innerHTML += `<div class="badge mvp">MVP</div>`;
+    p.classList.add("mvp-card");
+  }
+
+  if (p === topFragger.player) {
+    badgeBox.innerHTML += `<div class="badge top-fragger">Top Fragger</div>`;
+  }
+});
+
+/* Flip & counter animation */
+players.forEach(player => {
+  const card = player.querySelector(".flip-card");
+  const counters = player.querySelectorAll(".count");
+  let animated = false;
+
+  card.addEventListener("click", flip);
+
+  function flip() {
+    card.classList.toggle("flipped");
+
+    if (!animated && card.classList.contains("flipped")) {
+      counters.forEach(animateCounter);
+      animated = true;
+    }
+
+    if (card.classList.contains("flipped")) {
+      setTimeout(() => card.classList.remove("flipped"), 3000);
+    }
+  }
+});
+
+/* Counter animation */
+function animateCounter(el) {
+  const target = +el.dataset.value;
+  let current = 0;
+  const step = Math.ceil(target / 40);
+
+  function run() {
+    current += step;
+    if (current >= target) {
+      el.textContent = target;
+      return;
+    }
+    el.textContent = current;
+    requestAnimationFrame(run);
+  }
+  run();
+}
+</script>
+
+</body>
+</html>
