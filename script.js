@@ -1,7 +1,6 @@
-<script>
 const players = document.querySelectorAll(".player");
 
-// ===== MVP & TOP FRAGGER (UNCHANGED LOGIC) =====
+// ===== MVP & TOP FRAGGER =====
 let topFragger = null;
 let mvp = null;
 
@@ -32,23 +31,21 @@ players.forEach(p => {
   }
 });
 
-// ===== IMPROVED FLIP UX =====
+// ===== FLIP CARDS + COUNTER ANIMATION =====
 players.forEach(player => {
+  const flipInner = player.querySelector(".flip-inner");
   const card = player.querySelector(".flip-card");
   const counters = player.querySelectorAll(".count");
 
   let flipped = false;
   let animPlayed = false;
-  let lock = false;
   let autoBackTimer = null;
 
   let startX = 0;
   let startY = 0;
 
   // TAP
-  card.addEventListener("click", () => {
-    triggerFlip();
-  });
+  card.addEventListener("click", () => triggerFlip());
 
   // SWIPE START
   card.addEventListener("touchstart", e => {
@@ -63,20 +60,46 @@ players.forEach(player => {
     const dx = Math.abs(t.clientX - startX);
     const dy = Math.abs(t.clientY - startY);
 
-    // Swipe threshold (accurate, no accidental flip)
     if (dx > 50 && dx > dy) {
       triggerFlip();
     }
   });
 
   function triggerFlip() {
-    if (lock) return;
-    lock = true;
-
     flipped = !flipped;
-    card.classList.toggle("flipped", flipped);
+    flipInner.classList.toggle("flipped", flipped);
 
-    // Animate counters once
+    // Animate counters only once
     if (flipped && !animPlayed) {
       counters.forEach(c => animateCounter(c));
       animPlayed = true;
+    }
+
+    // Auto-flip back after 3 seconds
+    clearTimeout(autoBackTimer);
+    if (flipped) {
+      autoBackTimer = setTimeout(() => {
+        flipInner.classList.remove("flipped");
+        flipped = false;
+      }, 3000);
+    }
+  }
+});
+
+// ===== COUNTER ANIMATION FUNCTION =====
+function animateCounter(el) {
+  const target = +el.dataset.value;
+  let current = 0;
+  const step = Math.max(1, Math.ceil(target / 40));
+
+  function run() {
+    current += step;
+    if (current >= target) {
+      el.textContent = target;
+      return;
+    }
+    el.textContent = current;
+    requestAnimationFrame(run);
+  }
+  run();
+}
