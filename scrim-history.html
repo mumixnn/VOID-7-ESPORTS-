@@ -14,7 +14,6 @@ body {
   text-align: center;
 }
 
-/* HEADER */
 header {
   padding: 70px 20px 40px;
 }
@@ -29,47 +28,15 @@ header p {
   opacity: 0.85;
 }
 
-/* TABLE */
-.table-wrapper {
-  width: 95%;
-  max-width: 900px;
-  margin: 0 auto;
-  overflow-x: auto;
-}
+/* Table styles same as before */
+.table-wrapper { width: 95%; max-width: 900px; margin: 0 auto; overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; background: rgba(255,255,255,0.06); border-radius:16px; overflow:hidden; box-shadow:0 0 25px rgba(255,0,0,0.25);}
+th, td { padding:16px; text-align:center; }
+th { background: rgba(255,0,0,0.3); color: #ff4d4d; font-size:16px;}
+td { font-size:15px; }
+tr:nth-child(even){ background: rgba(255,255,255,0.04);}
+tr:hover{ background: rgba(255,0,0,0.18);}
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  background: rgba(255,255,255,0.06);
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 0 25px rgba(255,0,0,0.25);
-}
-
-th, td {
-  padding: 16px;
-  text-align: center;
-}
-
-th {
-  background: rgba(255,0,0,0.3);
-  color: #ff4d4d;
-  font-size: 16px;
-}
-
-td {
-  font-size: 15px;
-}
-
-tr:nth-child(even) {
-  background: rgba(255,255,255,0.04);
-}
-
-tr:hover {
-  background: rgba(255,0,0,0.18);
-}
-
-/* BACK BUTTON */
 .back-btn {
   display: inline-block;
   margin: 40px auto 60px;
@@ -82,10 +49,12 @@ tr:hover {
   font-weight: bold;
   box-shadow: 0 0 25px rgba(255,0,0,0.4);
 }
-
 .back-btn:hover {
   transform: scale(1.05);
 }
+
+/* Hidden scrim data for graph */
+#scrim-data { display:none; }
 </style>
 </head>
 
@@ -96,6 +65,7 @@ tr:hover {
   <p>Official scrim performance records of VOID 7 ESPORTS</p>
 </header>
 
+<!-- Visible Table -->
 <div class="table-wrapper">
   <table>
     <tr>
@@ -105,63 +75,59 @@ tr:hover {
       <th>#Overall Standings</th>
     </tr>
 
-    <tr>
+    <tr data-date="19 Jan 2026" data-standing="9">
       <td>19 Jan 2026</td>
       <td>02</td>
       <td>06</td>
       <td>#09</td>
     </tr>
 
-     <tr>
+    <tr data-date="18 Jan 2026" data-standing="10">
       <td>18 Jan 2026</td>
       <td>03</td>
       <td>16</td>
       <td>#10</td>
-     </tr>
+    </tr>
 
-        <!-- SCRIM DATA -->
-    <tr>
+    <tr data-date="17 Jan 2026" data-standing="5">
       <td>17 Jan 2026</td>
       <td>02</td>
       <td>14</td>
       <td>#05</td>
     </tr>
 
-    
-    <!-- SCRIM DATA -->
-    <tr>
+    <tr data-date="16 Jan 2026" data-standing="15">
       <td>16 Jan 2026</td>
       <td>03</td>
       <td>07</td>
       <td>#15</td>
     </tr>
-    
- <!-- SCRIM DATA -->
-    <tr>
+
+    <tr data-date="15 Jan 2026" data-standing="16">
       <td>15 Jan 2026</td>
       <td>02</td>
       <td>01</td>
       <td>#16</td>
     </tr>
 
-    <tr>
+    <tr data-date="13 Jan 2026" data-standing="1">
       <td>13 Jan 2026</td>
       <td>03</td>
       <td>27</td>
       <td>#01</td>
     </tr>
-    
-    <!-- ADD MORE ROWS BELOW -->
-    <!--
-    <tr>
-      <td>16 Jan 2026</td>
-      <td>3</td>
-      <td>12</td>
-      <td>5</td>
-    </tr>
-    -->
 
   </table>
+</div>
+
+<!-- Hidden div to read by JS -->
+<div id="scrim-data">
+  <div class="scrim" data-date="19 Jan 2026" data-standing="9"></div>
+  <div class="scrim" data-date="18 Jan 2026" data-standing="10"></div>
+  <div class="scrim" data-date="17 Jan 2026" data-standing="5"></div>
+  <div class="scrim" data-date="16 Jan 2026" data-standing="15"></div>
+  <div class="scrim" data-date="15 Jan 2026" data-standing="16"></div>
+  <div class="scrim" data-date="13 Jan 2026" data-standing="1"></div>
 </div>
 
 <a href="index.html" class="back-btn">RETURN HOME</a>
