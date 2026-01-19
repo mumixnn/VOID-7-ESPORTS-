@@ -1,150 +1,142 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>V07 Players</title>
-
 <style>
-/* ===== BASE ===== */
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #0b0b0b, #400000);
-  color: white;
-}
+  /* ===== BASE ===== */
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #0b0b0b, #400000);
+    color: white;
+  }
 
-h1 {
-  text-align: center;
-  color: #ff4d4d;
-  margin: 30px 0;
-}
+  h1 {
+    text-align: center;
+    color: #ff4d4d;
+    margin: 30px 0;
+  }
 
-/* ===== CONTAINER ===== */
-.players-container {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-  padding: 20px;
-  max-width: 420px;
-  margin: auto;
-}
+  /* ===== CONTAINER ===== */
+  .players-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 20px;
+    max-width: 420px;
+    margin: auto;
+  }
 
-/* ===== PLAYER CARD ===== */
-.player {
-  position: relative;
-}
+  /* ===== PLAYER CARD ===== */
+  .player {
+    position: relative;
+  }
 
-.flip-card {
-  width: 100%;
-  height: 320px;
-  perspective: 1200px;
-  cursor: pointer;
-}
+  .flip-card {
+    width: 100%;
+    height: 320px;
+    perspective: 1200px;
+    cursor: pointer;
+  }
 
-.flip-inner {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  transform-style: preserve-3d;
-  transition: transform 0.9s cubic-bezier(.4,.2,.2,1);
-}
+  .flip-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.9s cubic-bezier(.4,.2,.2,1);
+  }
 
-.flip-card.flipped .flip-inner {
-  transform: rotateY(180deg);
-}
+  .flip-card.flipped .flip-inner {
+    transform: rotateY(180deg);
+  }
 
-/* ===== CARD FACES ===== */
-.card-front,
-.card-back {
-  position: absolute;
-  inset: 0;
-  backface-visibility: hidden;
-  background: rgba(255,255,255,0.06);
-  border-radius: 18px;
-  padding: 25px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
+  /* ===== CARD FACES ===== */
+  .card-front,
+  .card-back {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    background: rgba(255,255,255,0.06);
+    border-radius: 18px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 
-.card-back {
-  transform: rotateY(180deg);
-}
+  .card-back {
+    transform: rotateY(180deg);
+  }
 
-/* ===== IMAGE ===== */
-.card-front img {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  border: 4px solid red;
-}
+  /* ===== IMAGE ===== */
+  .card-front img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 4px solid red;
+  }
 
-/* ===== NAME ===== */
-.player-name {
-  color: red;
-  margin: 12px 0 6px;
-}
+  /* ===== NAME ===== */
+  .player-name {
+    color: red;
+    margin: 12px 0 6px;
+  }
 
-/* ===== BADGES ===== */
-.badges {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 10px;
-}
+  /* ===== BADGES ===== */
+  .badges {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
 
-.badge {
-  padding: 6px 14px;
-  border-radius: 20px;
-  font-size: 13px;
-  font-weight: bold;
-}
+  .badge {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+  }
 
-.mvp {
-  background: gold;
-  color: black;
-}
+  .mvp {
+    background: gold;
+    color: black;
+  }
 
-.top-fragger {
-  background: red;
-}
+  .top-fragger {
+    background: red;
+  }
 
-/* ===== HINT ===== */
-.hint {
-  font-size: 13px;
-  opacity: 0.7;
-}
+  /* ===== STATS ===== */
+  .stats {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
 
-/* ===== STATS ===== */
-.stats {
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
+  .stat {
+    text-align: center;
+  }
 
-.stat {
-  text-align: center;
-}
+  .stat span {
+    font-size: 30px;
+    font-weight: bold;
+  }
 
-.stat span {
-  font-size: 30px;
-  font-weight: bold;
-}
+  .stat p {
+    margin: 5px 0 0;
+    color: #ff4d4d;
+  }
 
-.stat p {
-  margin: 5px 0 0;
-  color: #ff4d4d;
-}
+  /* ===== MVP GLOW ===== */
+  .mvp-card {
+    box-shadow: 0 0 30px gold;
+  }
 
-/* ===== MVP GLOW ===== */
-.mvp-card {
-  box-shadow: 0 0 30px gold;
-}
 </style>
 </head>
-
 <body>
 
 <h1>Scrims Overview</h1>
@@ -159,7 +151,6 @@ h1 {
           <img src="images/luffy.png" alt="V7 Luffy">
           <h2 class="player-name">LUFFY</h2>
           <div class="badges"></div>
-          <div class="hint">Tap or swipe for stats</div>
         </div>
         <div class="card-back">
           <div class="stats">
@@ -185,7 +176,6 @@ h1 {
           <img src="images/viel.png" alt="V7 Viel">
           <h2 class="player-name">VIEL</h2>
           <div class="badges"></div>
-          <div class="hint">Tap or swipe for stats</div>
         </div>
         <div class="card-back">
           <div class="stats">
@@ -211,7 +201,6 @@ h1 {
           <img src="images/god.png" alt="V7 God">
           <h2 class="player-name">GOD</h2>
           <div class="badges"></div>
-          <div class="hint">Tap or swipe for stats</div>
         </div>
         <div class="card-back">
           <div class="stats">
@@ -237,7 +226,6 @@ h1 {
           <img src="images/rune.png" alt="V7 Rune">
           <h2 class="player-name">RUNE</h2>
           <div class="badges"></div>
-          <div class="hint">Tap or swipe for stats</div>
         </div>
         <div class="card-back">
           <div class="stats">
@@ -263,7 +251,6 @@ h1 {
           <img src="images/myth.png" alt="V7 Myth">
           <h2 class="player-name">MYTH</h2>
           <div class="badges"></div>
-          <div class="hint">Tap or swipe for stats</div>
         </div>
         <div class="card-back">
           <div class="stats">
@@ -284,14 +271,15 @@ h1 {
 </div>
 
 <script>
+/* ===== MAIN JS ===== */
 const players = document.querySelectorAll(".player");
 let topFragger = null;
 let mvp = null;
 
 /* Add V7 prefix */
 players.forEach(p => {
-  const name = p.querySelector(".player-name");
-  name.textContent = "V7 " + name.textContent.trim();
+  const nameEl = p.querySelector(".player-name");
+  nameEl.textContent = "V7 " + nameEl.textContent.trim();
 });
 
 /* Determine MVP & Top Fragger */
@@ -299,8 +287,7 @@ players.forEach(p => {
   const kills = +p.dataset.kills;
   const damage = +p.dataset.damage;
 
-  if (!topFragger || kills > topFragger.kills ||
-     (kills === topFragger.kills && damage > topFragger.damage)) {
+  if (!topFragger || kills > topFragger.kills || (kills === topFragger.kills && damage > topFragger.damage)) {
     topFragger = { player: p, kills, damage };
   }
 
@@ -309,29 +296,45 @@ players.forEach(p => {
   }
 });
 
-/* Apply badges */
+/* Apply badges & glow */
 players.forEach(p => {
   const badgeBox = p.querySelector(".badges");
-
   if (p === mvp.player) {
-    badgeBox.innerHTML += `<div class="badge mvp">MVP</div>`;
-    p.classList.add("mvp-card");
+    badgeBox.innerHTML += `<div class="badge mvp">👑 MVP</div>`;
+    p.querySelector(".flip-card").classList.add("mvp-card");
   }
-
   if (p === topFragger.player) {
-    badgeBox.innerHTML += `<div class="badge top-fragger">Top Fragger</div>`;
+    badgeBox.innerHTML += `<div class="badge top-fragger">💥 Top Fragger</div>`;
   }
 });
 
-/* Flip & counter animation */
+/* Flip + counter + tap + 4-direction swipe */
 players.forEach(player => {
   const card = player.querySelector(".flip-card");
   const counters = player.querySelectorAll(".count");
   let animated = false;
 
-  card.addEventListener("click", flip);
+  let touchStartX = 0;
+  let touchStartY = 0;
 
-  function flip() {
+  // Tap
+  card.addEventListener("click", flipCard);
+
+  // Swipe
+  card.addEventListener("touchstart", e => {
+    touchStartX = e.changedTouches[0].screenX;
+    touchStartY = e.changedTouches[0].screenY;
+  });
+
+  card.addEventListener("touchend", e => {
+    const touchEndX = e.changedTouches[0].screenX;
+    const touchEndY = e.changedTouches[0].screenY;
+    const dx = touchEndX - touchStartX;
+    const dy = touchEndY - touchStartY;
+    if (Math.abs(dx) > 30 || Math.abs(dy) > 30) flipCard();
+  });
+
+  function flipCard() {
     card.classList.toggle("flipped");
 
     if (!animated && card.classList.contains("flipped")) {
@@ -350,7 +353,6 @@ function animateCounter(el) {
   const target = +el.dataset.value;
   let current = 0;
   const step = Math.ceil(target / 40);
-
   function run() {
     current += step;
     if (current >= target) {
