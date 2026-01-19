@@ -13,8 +13,7 @@
 body {
   margin: 0;
   font-family: 'Segoe UI', Arial, sans-serif;
-  background:
-    radial-gradient(circle at top, #2a0000, #0a0a0a 70%);
+  background: radial-gradient(circle at top, #2a0000, #0a0a0a 70%);
   color: white;
   text-align: center;
 }
@@ -135,10 +134,66 @@ footer {
   100% { opacity: 0; }
 }
 
+@keyframes fadeInOut {
+  0%, 30% { opacity: 1; }
+  50%, 100% { opacity: 0.3; }
+}
+
+/* ================= REFRESH BUTTONS ================= */
+.refresh-btn {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  padding: 18px 25px;
+  font-size: 18px;
+  font-weight: bold;
+  border: 2px solid #ff0000;
+  background: rgba(255,0,0,0.15);
+  color: #ff0000;
+  border-radius: 16px;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(255,0,0,0.3);
+  z-index: 999;
+  transition: all 0.3s ease;
+  animation: fadeInOut 6s infinite;
+}
+
+.refresh-btn:hover {
+  background: rgba(255,0,0,0.35);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 10px 25px rgba(255,0,0,0.45);
+}
+
+/* Second refresh button - slightly offset, also animated */
+.refresh-btn2 {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 18px 25px;
+  font-size: 18px;
+  font-weight: bold;
+  border: 2px solid #ff0000;
+  background: rgba(255,0,0,0.15);
+  color: #ff0000;
+  border-radius: 16px;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(255,0,0,0.3);
+  z-index: 999;
+  transition: all 0.3s ease;
+  animation: fadeInOut 5s infinite; /* slightly different speed */
+}
+
+.refresh-btn2:hover {
+  background: rgba(255,0,0,0.35);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 10px 25px rgba(255,0,0,0.45);
+}
+
 /* ================= MOBILE OPT ================= */
 @media (max-width: 480px) {
   header h1 { font-size: 40px; }
   section.stats a { font-size: 18px; }
+  .refresh-btn, .refresh-btn2 { padding: 14px 20px; font-size: 16px; }
 }
 </style>
 </head>
@@ -179,13 +234,9 @@ footer {
   © 2026 VOID 7 ESPORTS. All Rights Reserved.
 </footer>
 
-<!-- ================= AUTO REFRESH ================= -->
-<script>
-// Auto-refresh every 10 seconds
-setTimeout(() => {
-    location.reload();
-}, 10000);
-</script>
+<!-- ================= REFRESH BUTTONS ================= -->
+<button class="refresh-btn" onclick="location.reload()">🔄 Refresh</button>
+<button class="refresh-btn2" onclick="location.reload()">🔄 Refresh</button>
 
 </body>
 </html>
