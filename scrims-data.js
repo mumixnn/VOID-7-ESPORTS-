@@ -12,15 +12,4 @@ const scrims = [
     ]
   },
   {
-    date: "2026-01-18",
-    month: "January",
-    year: 2026,
-    players: [
-      { name: "LUFFY", kills: 10, damage: 1800 },
-      { name: "VIEL", kills: 9, damage: 1650 },
-      { name: "GOD", kills: 7, damage: 1400 },
-      { name: "RUNE", kills: 6, damage: 900 },
-      { name: "MYTH", kills: 2, damage: 400 }
-    ]
-  }
-];
+    
