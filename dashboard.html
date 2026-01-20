@@ -6,141 +6,28 @@
 <title>Pro Dashboard | VOID 7 ESPORTS</title>
 
 <style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: radial-gradient(circle at top, #1a0000, #080808 70%);
-  color: white;
-  text-align: center;
-}
-
-/* HEADER */
-header {
-  padding: 60px 20px 30px;
-}
-
-header h1 {
-  font-size: 40px;
-  color: #ff2b2b;
-}
-
-header p {
-  opacity: 0.85;
-}
-
-/* FILTERS */
-.filters {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin: 20px 0 40px;
-  flex-wrap: wrap;
-}
-
-.filters select {
-  padding: 12px 18px;
-  border-radius: 12px;
-  border: none;
-  font-weight: bold;
-  background: rgba(255,255,255,0.1);
-  color: white;
-}
-
-.filters option {
-  background: #0b0b0b;
-}
-
-/* STATS CARDS */
-.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
-  max-width: 1000px;
-  margin: 0 auto 40px;
-  padding: 0 15px;
-}
-
-.card {
-  background: rgba(255,255,255,0.07);
-  border-radius: 18px;
-  padding: 25px;
-  box-shadow: 0 0 25px rgba(255,0,0,0.25);
-}
-
-.card h2 {
-  font-size: 16px;
-  opacity: 0.8;
-  margin-bottom: 8px;
-}
-
-.card span {
-  font-size: 34px;
-  font-weight: bold;
-  color: #ff4d4d;
-}
-
-/* MVP */
-.mvp {
-  margin: 30px auto;
-  max-width: 450px;
-  padding: 30px;
-  border-radius: 22px;
-  background: linear-gradient(135deg, #ffcc00, #ff8800);
-  color: black;
-  box-shadow: 0 0 35px rgba(255,200,0,0.6);
-}
-
-.mvp h3 {
-  margin-bottom: 10px;
-}
-
-.mvp strong {
-  font-size: 26px;
-}
-
-/* TABLE */
-.table-wrapper {
-  width: 95%;
-  max-width: 900px;
-  margin: 30px auto 50px;
-  overflow-x: auto;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  background: rgba(255,255,255,0.06);
-  border-radius: 16px;
-  overflow: hidden;
-}
-
-th, td {
-  padding: 14px;
-}
-
-th {
-  background: rgba(255,0,0,0.3);
-  color: #ff4d4d;
-}
-
-tr:nth-child(even) {
-  background: rgba(255,255,255,0.04);
-}
-
-/* BACK */
-.back-btn {
-  display: inline-block;
-  margin-bottom: 50px;
-  padding: 16px 45px;
-  background: linear-gradient(90deg, #ff0000, #aa0000);
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-  border-radius: 14px;
-}
+body{margin:0;font-family:Arial,sans-serif;background:radial-gradient(circle at top,#1a0000,#080808 70%);color:white;text-align:center;}
+header{padding:60px 20px 30px;}
+header h1{font-size:40px;color:#ff2b2b;}
+header p{opacity:0.85;}
+.filters{display:flex;justify-content:center;gap:15px;margin:20px 0 40px;flex-wrap:wrap;}
+.filters select{padding:12px 18px;border-radius:12px;border:none;font-weight:bold;background:rgba(255,255,255,0.1);color:white;}
+.filters option{background:#0b0b0b;}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;max-width:1000px;margin:0 auto 40px;padding:0 15px;}
+.card{background:rgba(255,255,255,0.07);border-radius:18px;padding:25px;box-shadow:0 0 25px rgba(255,0,0,0.25);}
+.card h2{font-size:16px;opacity:0.8;margin-bottom:8px;}
+.card span{font-size:34px;font-weight:bold;color:#ff4d4d;}
+.mvp{margin:30px auto;max-width:450px;padding:30px;border-radius:22px;background:linear-gradient(135deg,#ffcc00,#ff8800);color:black;box-shadow:0 0 35px rgba(255,200,0,0.6);}
+.mvp h3{margin-bottom:10px;}
+.mvp strong{font-size:26px;}
+.table-wrapper{width:95%;max-width:900px;margin:30px auto 50px;overflow-x:auto;}
+table{width:100%;border-collapse:collapse;background:rgba(255,255,255,0.06);border-radius:16px;overflow:hidden;}
+th,td{padding:14px;text-align:center;}
+th{background:rgba(255,0,0,0.3);color:#ff4d4d;}
+tr:nth-child(even){background:rgba(255,255,255,0.04);}
+.back-btn{display:inline-block;margin-bottom:50px;padding:16px 45px;background:linear-gradient(90deg,#ff0000,#aa0000);color:white;text-decoration:none;font-weight:bold;border-radius:14px;}
 </style>
 </head>
-
 <body>
 
 <header>
@@ -148,55 +35,41 @@ tr:nth-child(even) {
   <p>Performance analytics & MVP system</p>
 </header>
 
-<!-- FILTERS -->
+<!-- Filters -->
 <div class="filters">
   <select id="monthFilter"></select>
   <select id="yearFilter"></select>
 </div>
 
-<!-- STAT CARDS -->
+<!-- Stats Cards -->
 <div class="cards">
-  <div class="card">
-    <h2>Total Scrims</h2>
-    <span id="totalScrims">0</span>
-  </div>
-  <div class="card">
-    <h2>Total Kills</h2>
-    <span id="totalKills">0</span>
-  </div>
-  <div class="card">
-    <h2>Total Damage</h2>
-    <span id="totalDamage">0</span>
-  </div>
+  <div class="card"><h2>Total Scrims</h2><span id="totalScrims">0</span></div>
+  <div class="card"><h2>Total Kills</h2><span id="totalKills">0</span></div>
+  <div class="card"><h2>Total Damage</h2><span id="totalDamage">0</span></div>
 </div>
 
 <!-- MVP -->
-<div class="mvp" id="mvpCard">
+<div class="mvp">
   <h3>MVP OF SELECTED PERIOD</h3>
   <strong id="mvpName">—</strong>
   <p id="mvpStats"></p>
 </div>
 
-<!-- PLAYER TABLE -->
+<!-- Player Table -->
 <div class="table-wrapper">
   <table>
-    <thead>
-      <tr>
-        <th>Player</th>
-        <th>Kills</th>
-        <th>Damage</th>
-      </tr>
-    </thead>
+    <thead><tr><th>Player</th><th>Kills</th><th>Damage</th></tr></thead>
     <tbody id="playerTable"></tbody>
   </table>
 </div>
 
 <a href="index.html" class="back-btn">RETURN HOME</a>
 
-<!-- ADMIN DATA -->
+<!-- Include scrim data -->
 <script src="scrims-data.js"></script>
 
 <script>
+// DOM references
 const monthFilter = document.getElementById("monthFilter");
 const yearFilter = document.getElementById("yearFilter");
 const totalScrimsEl = document.getElementById("totalScrims");
@@ -206,35 +79,34 @@ const playerTable = document.getElementById("playerTable");
 const mvpName = document.getElementById("mvpName");
 const mvpStats = document.getElementById("mvpStats");
 
-// Populate filters
+// Populate filters dynamically
 const months = [...new Set(scrims.map(s => s.month))];
 const years = [...new Set(scrims.map(s => s.year))];
 
 monthFilter.innerHTML = `<option value="all">All Months</option>` + months.map(m => `<option>${m}</option>`).join("");
 yearFilter.innerHTML = `<option value="all">All Years</option>` + years.map(y => `<option>${y}</option>`).join("");
 
+// Function to update dashboard
 function updateDashboard() {
   const month = monthFilter.value;
   const year = yearFilter.value;
 
-  const filtered = scrims.filter(s =>
+  const filteredScrims = scrims.filter(s =>
     (month === "all" || s.month === month) &&
     (year === "all" || s.year == year)
   );
 
-  totalScrimsEl.textContent = filtered.length;
+  totalScrimsEl.textContent = filteredScrims.length;
 
-  let players = {};
-  let totalKills = 0;
-  let totalDamage = 0;
+  // Aggregate stats per player
+  const playerTotals = {};
+  let totalKills = 0, totalDamage = 0;
 
-  filtered.forEach(scrim => {
+  filteredScrims.forEach(scrim => {
     scrim.players.forEach(p => {
-      if (!players[p.name]) {
-        players[p.name] = { kills: 0, damage: 0 };
-      }
-      players[p.name].kills += p.kills;
-      players[p.name].damage += p.damage;
+      if (!playerTotals[p.name]) playerTotals[p.name] = { kills:0, damage:0 };
+      playerTotals[p.name].kills += p.kills;
+      playerTotals[p.name].damage += p.damage;
       totalKills += p.kills;
       totalDamage += p.damage;
     });
@@ -243,16 +115,11 @@ function updateDashboard() {
   totalKillsEl.textContent = totalKills;
   totalDamageEl.textContent = totalDamage;
 
-  // MVP logic
-  let mvp = null;
-  let bestScore = 0;
-
-  for (const name in players) {
-    const score = players[name].kills * 100 + players[name].damage;
-    if (score > bestScore) {
-      bestScore = score;
-      mvp = { name, ...players[name] };
-    }
+  // Determine MVP
+  let mvp = null, bestScore = -1;
+  for (const name in playerTotals) {
+    const score = playerTotals[name].kills * 100 + playerTotals[name].damage;
+    if (score > bestScore) { bestScore = score; mvp = {name, ...playerTotals[name]}; }
   }
 
   if (mvp) {
@@ -260,23 +127,18 @@ function updateDashboard() {
     mvpStats.textContent = `Kills: ${mvp.kills} | Damage: ${mvp.damage}`;
   }
 
-  // Table
+  // Populate player table
   playerTable.innerHTML = "";
-  for (const name in players) {
-    playerTable.innerHTML += `
-      <tr>
-        <td>${name}</td>
-        <td>${players[name].kills}</td>
-        <td>${players[name].damage}</td>
-      </tr>
-    `;
+  for (const name in playerTotals) {
+    playerTable.innerHTML += `<tr><td>${name}</td><td>${playerTotals[name].kills}</td><td>${playerTotals[name].damage}</td></tr>`;
   }
 }
 
+// Event listeners
 monthFilter.addEventListener("change", updateDashboard);
 yearFilter.addEventListener("change", updateDashboard);
 
-// Init
+// Initialize dashboard
 updateDashboard();
 </script>
 
