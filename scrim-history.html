@@ -1,183 +1,47 @@
-l<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Scrims History | VOID 7 ESPORTS</title>
-
 <style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #0b0b0b, #440000);
-  color: white;
-  text-align: center;
-}
-
-header {
-  padding: 70px 20px 30px;
-}
-
-header h1 {
-  font-size: 42px;
-  color: red;
-  margin-bottom: 8px;
-}
-
-header p {
-  opacity: 0.85;
-}
-
-/* FILTERS */
-.filters {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin: 20px 0 30px;
-  flex-wrap: wrap;
-}
-
-.filters select {
-  padding: 12px 18px;
-  border-radius: 12px;
-  border: none;
-  font-size: 15px;
-  font-weight: bold;
-  background: rgba(255,255,255,0.1);
-  color: white;
-  outline: none;
-}
-
-.filters option {
-  background: #0b0b0b;
-}
-
-/* TABLE */
-.table-wrapper {
-  width: 95%;
-  max-width: 900px;
-  margin: 0 auto;
-  overflow-x: auto;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  background: rgba(255,255,255,0.06);
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 0 25px rgba(255,0,0,0.25);
-}
-
-th, td {
-  padding: 16px;
-  text-align: center;
-}
-
-th {
-  background: rgba(255,0,0,0.3);
-  color: #ff4d4d;
-  font-size: 16px;
-}
-
-td {
-  font-size: 15px;
-}
-
-tr:nth-child(even) {
-  background: rgba(255,255,255,0.04);
-}
-
-tr:hover {
-  background: rgba(255,0,0,0.18);
-}
-
-/* BACK BUTTON */
-.back-btn {
-  display: inline-block;
-  margin: 40px auto 60px;
-  background: linear-gradient(90deg, #ff0000, #aa0000);
-  padding: 18px 50px;
-  color: white;
-  text-decoration: none;
-  border-radius: 14px;
-  font-size: 20px;
-  font-weight: bold;
-  box-shadow: 0 0 25px rgba(255,0,0,0.4);
-}
-
-.back-btn:hover {
-  transform: scale(1.05);
-}
+body{margin:0;font-family:Arial,sans-serif;background:linear-gradient(135deg,#0b0b0b,#440000);color:white;text-align:center;}
+header{padding:70px 20px 30px;}
+header h1{font-size:42px;color:red;margin-bottom:8px;}
+header p{opacity:0.85;}
+.filters{display:flex;justify-content:center;gap:15px;margin:20px 0 30px;flex-wrap:wrap;}
+.filters select{padding:12px 18px;border-radius:12px;border:none;font-size:15px;font-weight:bold;background:rgba(255,255,255,0.1);color:white;outline:none;}
+.filters option{background:#0b0b0b;}
+.table-wrapper{width:95%;max-width:900px;margin:0 auto;overflow-x:auto;}
+table{width:100%;border-collapse:collapse;background:rgba(255,255,255,0.06);border-radius:16px;overflow:hidden;box-shadow:0 0 25px rgba(255,0,0,0.25);}
+th,td{padding:16px;text-align:center;}
+th{background:rgba(255,0,0,0.3);color:#ff4d4d;font-size:16px;}
+td{font-size:15px;}
+tr:nth-child(even){background:rgba(255,255,255,0.04);}
+tr:hover{background:rgba(255,0,0,0.18);}
+.back-btn{display:inline-block;margin:40px auto 60px;background:linear-gradient(90deg,#ff0000,#aa0000);padding:18px 50px;color:white;text-decoration:none;border-radius:14px;font-size:20px;font-weight:bold;box-shadow:0 0 25px rgba(255,0,0,0.4);}
+.back-btn:hover{transform:scale(1.05);}
 </style>
 </head>
-
 <body>
 
 <header>
-  <h1>SCRIMS HISTORY</h1>
-  <p>Official scrim performance records of VOID 7 ESPORTS</p>
+<h1>SCRIMS HISTORY</h1>
+<p>Official scrim performance records of VOID 7 ESPORTS</p>
 </header>
 
-<!-- FILTERS -->
 <div class="filters">
-  <select id="monthFilter">
-    <option value="all">All Months</option>
-  </select>
-
-  <select id="yearFilter">
-    <option value="all">All Years</option>
-  </select>
+  <select id="monthFilter"><option value="all">All Months</option></select>
+  <select id="yearFilter"><option value="all">All Years</option></select>
 </div>
 
-<!-- TABLE -->
 <div class="table-wrapper">
   <table id="scrimTable">
-    <thead>
-      <tr>
-        <th>Date</th>
-        <th>Match Played</th>
-        <th>Total Points</th>
-        <th>#Overall Standings</th>
-      </tr>
-    </thead>
+    <thead><tr><th>Date</th><th>Match</th><th>Total Points</th><th>#Standing</th></tr></thead>
     <tbody>
-      <tr data-month="January" data-year="2026">
-        <td>19 Jan 2026</td>
-        <td>02</td>
-        <td>06</td>
-        <td>#09</td>
-      </tr>
-      <tr data-month="January" data-year="2026">
-        <td>18 Jan 2026</td>
-        <td>03</td>
-        <td>16</td>
-        <td>#10</td>
-      </tr>
-      <tr data-month="January" data-year="2026">
-        <td>17 Jan 2026</td>
-        <td>02</td>
-        <td>14</td>
-        <td>#05</td>
-      </tr>
-      <tr data-month="January" data-year="2026">
-        <td>16 Jan 2026</td>
-        <td>03</td>
-        <td>07</td>
-        <td>#15</td>
-      </tr>
-      <tr data-month="January" data-year="2026">
-        <td>15 Jan 2026</td>
-        <td>02</td>
-        <td>01</td>
-        <td>#16</td>
-      </tr>
-      <tr data-month="January" data-year="2026">
-        <td>13 Jan 2026</td>
-        <td>03</td>
-        <td>27</td>
-        <td>#01</td>
-      </tr>
+      <tr data-month="January" data-year="2026"><td>19 Jan 2026</td><td>02</td><td>06</td><td>#09</td></tr>
+      <tr data-month="January" data-year="2026"><td>18 Jan 2026</td><td>03</td><td>16</td><td>#10</td></tr>
+      <tr data-month="January" data-year="2026"><td>17 Jan 2026</td><td>02</td><td>14</td><td>#05</td></tr>
     </tbody>
   </table>
 </div>
@@ -185,41 +49,16 @@ tr:hover {
 <a href="index.html" class="back-btn">RETURN HOME</a>
 
 <script>
-const rows = document.querySelectorAll("#scrimTable tbody tr");
-const monthFilter = document.getElementById("monthFilter");
-const yearFilter = document.getElementById("yearFilter");
-
-const months = new Set();
-const years = new Set();
-
-// Collect months & years
-rows.forEach(row => {
-  months.add(row.dataset.month);
-  years.add(row.dataset.year);
-});
-
-// Populate filters
-months.forEach(m => {
-  monthFilter.innerHTML += `<option value="${m}">${m}</option>`;
-});
-years.forEach(y => {
-  yearFilter.innerHTML += `<option value="${y}">${y}</option>`;
-});
-
-// Filter function
-function applyFilter() {
-  const month = monthFilter.value;
-  const year = yearFilter.value;
-
-  rows.forEach(row => {
-    const matchMonth = month === "all" || row.dataset.month === month;
-    const matchYear = year === "all" || row.dataset.year === year;
-    row.style.display = matchMonth && matchYear ? "" : "none";
-  });
-}
-
-monthFilter.addEventListener("change", applyFilter);
-yearFilter.addEventListener("change", applyFilter);
+const rows=document.querySelectorAll("#scrimTable tbody tr");
+const monthFilter=document.getElementById("monthFilter");
+const yearFilter=document.getElementById("yearFilter");
+const months=new Set(),years=new Set();
+rows.forEach(r=>{months.add(r.dataset.month);years.add(r.dataset.year);});
+months.forEach(m=>monthFilter.innerHTML+=`<option value="${m}">${m}</option>`);
+years.forEach(y=>yearFilter.innerHTML+=`<option value="${y}">${y}</option>`);
+function applyFilter(){const m=monthFilter.value,y=yearFilter.value;rows.forEach(r=>{r.style.display=(m=="all"||r.dataset.month==m)&&(y=="all"||r.dataset.year==y)?"":"none";});}
+monthFilter.addEventListener("change",applyFilter);
+yearFilter.addEventListener("change",applyFilter);
 </script>
 
 </body>
