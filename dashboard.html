@@ -24,25 +24,6 @@ header h1 {
 header p {
   opacity: 0.85;
 }
-.filters {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin: 20px 0 40px;
-  flex-wrap: wrap;
-}
-.filters select {
-  padding: 12px 18px;
-  border-radius: 12px;
-  border: none;
-  font-weight: bold;
-  background: rgba(255,255,255,0.1);
-  color: white;
-  outline: none;
-}
-.filters option {
-  background: #0b0b0b;
-}
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
@@ -123,108 +104,73 @@ tr:nth-child(even) {
 
 <header>
 <h1>PRO DASHBOARD</h1>
-<p>Performance analytics & MVP system</p>
+<p>Manual stats display for VOID 7 ESPORTS</p>
 </header>
-
-<!-- Filters -->
-<div class="filters">
-  <select id="monthFilter"></select>
-  <select id="yearFilter"></select>
-</div>
 
 <!-- Stats Cards -->
 <div class="cards">
-  <div class="card"><h2>Total Scrims</h2><span id="totalScrims">0</span></div>
-  <div class="card"><h2>Total Kills</h2><span id="totalKills">0</span></div>
-  <div class="card"><h2>Total Damage</h2><span id="totalDamage">0</span></div>
+  <div class="card">
+    <h2>Total Scrims</h2>
+    <span>6</span>
+  </div>
+  <div class="card">
+    <h2>Total Kills</h2>
+    <span>49</span>
+  </div>
+  <div class="card">
+    <h2>Total Damage</h2>
+    <span>7828</span>
+  </div>
 </div>
 
 <!-- MVP -->
 <div class="mvp">
 <h3>MVP OF SELECTED PERIOD</h3>
-<strong id="mvpName">—</strong>
-<p id="mvpStats"></p>
+<strong>V7 VIEL</strong>
+<p>Kills: 19 | Damage: 2826</p>
 </div>
 
 <!-- Player Table -->
 <div class="table-wrapper">
 <table>
-<thead><tr><th>Player</th><th>Kills</th><th>Damage</th></tr></thead>
-<tbody id="playerTable"></tbody>
+<thead>
+<tr>
+<th>Player</th>
+<th>Kills</th>
+<th>Damage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>V7 LUFFY</td>
+<td>9</td>
+<td>1860</td>
+</tr>
+<tr>
+<td>V7 VIEL</td>
+<td>19</td>
+<td>2826</td>
+</tr>
+<tr>
+<td>V7 GOD</td>
+<td>14</td>
+<td>2408</td>
+</tr>
+<tr>
+<td>V7 RUNE</td>
+<td>7</td>
+<td>734</td>
+</tr>
+<tr>
+<td>V7 MYTH</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
 </table>
 </div>
 
 <a href="index.html" class="back-btn">RETURN HOME</a>
-
-<!-- Include scrim data -->
-<script src="scrims-data.js"></script>
-
-<script>
-const monthFilter = document.getElementById("monthFilter");
-const yearFilter = document.getElementById("yearFilter");
-const totalScrimsEl = document.getElementById("totalScrims");
-const totalKillsEl = document.getElementById("totalKills");
-const totalDamageEl = document.getElementById("totalDamage");
-const playerTable = document.getElementById("playerTable");
-const mvpName = document.getElementById("mvpName");
-const mvpStats = document.getElementById("mvpStats");
-
-// Populate filters
-const months = [...new Set(scrims.map(s => s.month))];
-const years = [...new Set(scrims.map(s => s.year))];
-
-monthFilter.innerHTML = `<option value="all">All Months</option>` + months.map(m => `<option>${m}</option>`).join("");
-yearFilter.innerHTML = `<option value="all">All Years</option>` + years.map(y => `<option>${y}</option>`).join("");
-
-// Update dashboard function
-function updateDashboard() {
-  const month = monthFilter.value;
-  const year = yearFilter.value;
-
-  const filteredScrims = scrims.filter(s => (month=="all" || s.month==month) && (year=="all" || s.year==year));
-
-  totalScrimsEl.textContent = filteredScrims.length;
-
-  const playerTotals = {};
-  let totalKills = 0, totalDamage = 0;
-
-  filteredScrims.forEach(scrim => {
-    scrim.players.forEach(p=>{
-      if(!playerTotals[p.name]) playerTotals[p.name] = { kills:0, damage:0 };
-      playerTotals[p.name].kills += p.kills;
-      playerTotals[p.name].damage += p.damage;
-      totalKills += p.kills;
-      totalDamage += p.damage;
-    });
-  });
-
-  totalKillsEl.textContent = totalKills;
-  totalDamageEl.textContent = totalDamage;
-
-  // Calculate MVP
-  let mvp=null, bestScore=-1;
-  for(const name in playerTotals){
-    const score = playerTotals[name].kills*100 + playerTotals[name].damage;
-    if(score>bestScore){bestScore=score;mvp={name, ...playerTotals[name]};}
-  }
-  if(mvp){
-    mvpName.textContent = mvp.name;
-    mvpStats.textContent = `Kills: ${mvp.kills} | Damage: ${mvp.damage}`;
-  }
-
-  // Fill player table
-  playerTable.innerHTML = "";
-  for(const name in playerTotals){
-    playerTable.innerHTML += `<tr><td>${name}</td><td>${playerTotals[name].kills}</td><td>${playerTotals[name].damage}</td></tr>`;
-  }
-}
-
-monthFilter.addEventListener("change", updateDashboard);
-yearFilter.addEventListener("change", updateDashboard);
-
-// Initialize
-updateDashboard();
-</script>
 
 </body>
 </html>
