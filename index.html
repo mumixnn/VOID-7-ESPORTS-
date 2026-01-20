@@ -3,7 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VOID 7 ESPORTS</title>
+
+<title>VOID 7 Esports | BGMI Competitive Team</title>
+
+<!-- ===== SEO ===== -->
+<meta name="description" content="VOID 7 Esports is a professional BGMI esports team from Kashmir. View scrims history, player stats, MVPs and performance analytics.">
+<meta name="keywords" content="VOID 7 Esports, BGMI team, Kashmir esports, scrims stats, esports dashboard">
+<meta name="author" content="VOID 7 Esports">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://muminxnn.github.io/VOID-7-ESPORTS/">
+
+<!-- ===== STRUCTURED DATA ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SportsTeam",
+  "name": "VOID 7 Esports",
+  "sport": "BGMI",
+  "foundingLocation": "Kashmir, India",
+  "sameAs": ["https://instagram.com/Void7_esports"]
+}
+</script>
 
 <style>
 /* ================= RESET ================= */
@@ -13,8 +33,7 @@
 body {
   margin: 0;
   font-family: 'Segoe UI', Arial, sans-serif;
-  background:
-    radial-gradient(circle at top, #3a0000, #090909 70%);
+  background: radial-gradient(circle at top, #3a0000, #090909 70%);
   color: white;
   text-align: center;
   overflow-x: hidden;
@@ -85,26 +104,15 @@ section.stats a {
   box-shadow: 0 10px 30px rgba(255,0,0,0.45);
   transition: all 0.25s ease;
   position: relative;
-  overflow: hidden;
 }
 
-/* Ripple effect */
-section.stats a::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle, rgba(255,255,255,0.35) 10%, transparent 11%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
+section.stats a:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 40px rgba(255,0,0,0.65);
 }
 
 section.stats a:active {
   transform: scale(0.97);
-}
-
-section.stats a:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 18px 40px rgba(255,0,0,0.65);
 }
 
 /* ================= HINT ================= */
@@ -130,8 +138,8 @@ section.stats a:hover {
   50% { transform: translateY(7px); }
 }
 
-/* ================= CONTACT ================= */
-section.contact {
+/* ================= INFO SECTIONS ================= */
+section.info {
   margin: 80px auto 50px;
   max-width: 600px;
   padding: 25px;
@@ -141,19 +149,13 @@ section.contact {
   border: 1px solid rgba(255,255,255,0.12);
 }
 
-section.contact h2 {
+section.info h2 {
   color: #ff4d4d;
   margin-bottom: 15px;
 }
 
-section.contact a {
-  color: #ff2b2b;
-  text-decoration: none;
-  font-weight: 600;
-}
-
-section.contact a:hover {
-  text-decoration: underline;
+section.info p {
+  margin: 8px 0;
 }
 
 /* ================= FOOTER ================= */
@@ -199,11 +201,11 @@ footer {
 <body>
 
 <header class="fade-up">
-  <img src="logo.png" alt="VOID 7 ESPORTS Logo">
+  <img src="logo.png" alt="VOID 7 Esports Logo">
   <h1>VOID 7 ESPORTS</h1>
   <p>
-    Growing Esports Organisation from Kashmir.<br>
-    Competing in BGMI with a vision to reach the global stage.
+    Elite BGMI Esports Organisation from Kashmir.<br>
+    Built on discipline, data, and domination.
   </p>
 </header>
 
@@ -211,6 +213,7 @@ footer {
   <a href="players.html">VIEW PLAYER STATS</a>
   <a href="scrim-history.html">SCRIMS HISTORY</a>
   <a href="performance.html">PERFORMANCE GRAPH</a>
+  <a href="dashboard.html">PRO DASHBOARD</a>
 </section>
 
 <div class="hint fade-up delay-2">
@@ -218,22 +221,32 @@ footer {
   <div class="arrow">⬇</div>
 </div>
 
-<section class="contact fade-up delay-3">
+<section class="info fade-up delay-3">
+  <h2>Team Highlights</h2>
+  <p>✔ Monthly Scrim Tracking</p>
+  <p>✔ Auto MVP System</p>
+  <p>✔ Performance Analytics Dashboard</p>
+</section>
+
+<section class="info fade-up delay-3">
   <h2>Contact Us</h2>
   <p>
     Instagram:
-    <a href="https://instagram.com/Void7_esports" target="_blank">
+    <a href="https://instagram.com/Void7_esports" target="_blank" style="color:#ff2b2b;">
       @Void7_esports
     </a>
   </p>
 </section>
 
 <footer>
-  © 2026 VOID 7 ESPORTS. All Rights Reserved.
+  © 2026 VOID 7 Esports • BGMI Competitive Team • India
 </footer>
 
 <button class="refresh-btn" onclick="location.reload()">🔄</button>
 <button class="refresh-btn2" onclick="location.reload()">🔄</button>
+
+<!-- Admin data hook -->
+<script src="scrims-data.js"></script>
 
 </body>
 </html>
