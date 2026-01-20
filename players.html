@@ -3,283 +3,368 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>V7 Players | VOID 7 ESPORTS</title>
-
+<title>V07 Players</title>
 <style>
-body {
-  margin: 0;
-  font-family: 'Segoe UI', Arial, sans-serif;
-  background: radial-gradient(circle at top, #2a0000, #0a0a0a 70%);
-  color: white;
-  text-align: center;
-}
+  /* ===== BASE ===== */
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #0b0b0b, #400000);
+    color: white;
+  }
 
-/* HEADER */
-header {
-  padding: 60px 20px 30px;
-}
-header h1 {
-  font-size: 42px;
-  color: #ff2b2b;
-  margin-bottom: 10px;
-}
-header p {
-  opacity: 0.85;
-}
+  h1 {
+    text-align: center;
+    color: #ff4d4d;
+    margin: 30px 0;
+  }
 
-/* PLAYER CARD */
-.player {
-  background: rgba(255,255,255,0.05);
-  max-width: 500px;
-  margin: 30px auto;
-  padding: 25px;
-  border-radius: 18px;
-}
+  /* ===== CONTAINER ===== */
+  .players-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 20px;
+    max-width: 420px;
+    margin: auto;
+  }
 
-.flip-card {
-  perspective: 1000px;
-}
+  /* ===== PLAYER CARD ===== */
+  .player {
+    position: relative;
+  }
 
-.flip-inner {
-  position: relative;
-  width: 100%;
-  transform-style: preserve-3d;
-  transition: transform 0.6s;
-}
+  .flip-card {
+    width: 100%;
+    height: 320px;
+    perspective: 1200px;
+    cursor: pointer;
+  }
 
-.flip-card.flipped .flip-inner {
-  transform: rotateY(180deg);
-}
+  .flip-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.9s cubic-bezier(.4,.2,.2,1);
+  }
 
-.card-front, .card-back {
-  position: absolute;
-  width: 100%;
-  backface-visibility: hidden;
-}
+  .flip-card.flipped .flip-inner {
+    transform: rotateY(180deg);
+  }
 
-.card-front img {
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  border: 3px solid red;
-}
+  /* ===== CARD FACES ===== */
+  .card-front,
+  .card-back {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    background: rgba(255,255,255,0.06);
+    border-radius: 18px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 
-.card-front h2 {
-  color: red;
-  margin: 10px 0 5px;
-}
+  .card-back {
+    transform: rotateY(180deg);
+  }
 
-.badges {
-  margin: 10px 0;
-}
+  /* ===== IMAGE ===== */
+  .card-front img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 4px solid red;
+  }
 
-.card-back {
-  background: rgba(255,255,255,0.05);
-  border-radius: 12px;
-  transform: rotateY(180deg);
-  padding: 20px;
-}
+  /* ===== NAME ===== */
+  .player-name {
+    color: red;
+    margin: 12px 0 6px;
+  }
 
-.stats {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 15px;
-}
+  /* ===== BADGES ===== */
+  .badges {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
 
-.stat h3 {
-  color: #ff4d4d;
-  margin-bottom: 5px;
-}
+  .badge {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+  }
 
-.stat span {
-  font-size: 26px;
-  font-weight: bold;
-}
+  .mvp {
+    background: gold;
+    color: black;
+  }
 
-/* BADGES */
-.badge {
-  display: inline-block;
-  padding: 6px 16px;
-  border-radius: 20px;
-  font-weight: bold;
-  margin: 5px;
-}
+  .top-fragger {
+    background: red;
+  }
 
-.badge.mvp {
-  background: gold;
-  color: black;
-}
+  /* ===== STATS ===== */
+  .stats {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
 
-.badge.top-fragger {
-  background: red;
-  color: white;
-}
+  .stat {
+    text-align: center;
+  }
 
-/* MVP GLOW */
-.mvp-card {
-  box-shadow: 0 0 25px gold;
-}
+  .stat span {
+    font-size: 30px;
+    font-weight: bold;
+  }
 
-/* RETURN HOME */
-.back-btn {
-  display: inline-block;
-  margin: 40px auto 60px;
-  background: linear-gradient(90deg, #ff0000, #aa0000);
-  padding: 18px 50px;
-  color: white;
-  text-decoration: none;
-  border-radius: 14px;
-  font-size: 20px;
-  font-weight: bold;
-  box-shadow: 0 0 25px rgba(255,0,0,0.4);
-}
+  .stat p {
+    margin: 5px 0 0;
+    color: #ff4d4d;
+  }
 
-.back-btn:hover {
-  transform: scale(1.05);
-}
+  /* ===== MVP GLOW ===== */
+  .mvp-card {
+    box-shadow: 0 0 30px gold;
+  }
 
-/* MOBILE */
-@media (max-width:480px){
-  header h1{font-size:36px;}
-  .stat span{font-size:22px;}
-}
 </style>
 </head>
-
 <body>
 
-<header>
-  <h1>VOID 7 Players</h1>
-  <p>Tap or swipe cards to see kills and damage stats. MVP & Top Fragger highlighted!</p>
-</header>
+<h1>Scrims Overview</h1>
 
-<!-- PLAYER 1 -->
-<div class="player" data-kills="8" data-damage="1371">
-  <div class="flip-card">
-    <div class="flip-inner">
-      <div class="card-front">
-        <img src="images/luffy.png" alt="V7 Luffy">
-        <h2 class="player-name">LUFFY</h2>
-        <div class="badges"></div>
-      </div>
-      <div class="card-back">
-        <div class="stats">
-          <div class="stat">
-            <h3>Kills</h3>
-            <span class="count" data-value="8">0</span>
-          </div>
-          <div class="stat">
-            <h3>Damage</h3>
-            <span class="count" data-value="1371">0</span>
+<div class="players-container">
+
+  <!-- PLAYER 1 -->
+  <div class="player" data-kills="9" data-damage="1860">
+    <div class="flip-card">
+      <div class="flip-inner">
+        <div class="card-front">
+          <img src="images/luffy.png" alt="V7 Luffy">
+          <h2 class="player-name">LUFFY</h2>
+          <div class="badges"></div>
+        </div>
+        <div class="card-back">
+          <div class="stats">
+            <div class="stat">
+              <span class="count" data-value="9">0</span>
+              <p>Kills</p>
+            </div>
+            <div class="stat">
+              <span class="count" data-value="1860">0</span>
+              <p>Damage</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- PLAYER 2 -->
-<div class="player" data-kills="13" data-damage="2008">
-  <div class="flip-card">
-    <div class="flip-inner">
-      <div class="card-front">
-        <img src="images/viel.png" alt="V7 Viel">
-        <h2 class="player-name">VIEL</h2>
-        <div class="badges"></div>
-      </div>
-      <div class="card-back">
-        <div class="stats">
-          <div class="stat">
-            <h3>Kills</h3>
-            <span class="count" data-value="13">0</span>
-          </div>
-          <div class="stat">
-            <h3>Damage</h3>
-            <span class="count" data-value="2008">0</span>
+  <!-- PLAYER 2 -->
+  <div class="player" data-kills="19" data-damage="2826">
+    <div class="flip-card">
+      <div class="flip-inner">
+        <div class="card-front">
+          <img src="images/viel.png" alt="V7 Viel">
+          <h2 class="player-name">VIEL</h2>
+          <div class="badges"></div>
+        </div>
+        <div class="card-back">
+          <div class="stats">
+            <div class="stat">
+              <span class="count" data-value="19">0</span>
+              <p>Kills</p>
+            </div>
+            <div class="stat">
+              <span class="count" data-value="2826">0</span>
+              <p>Damage</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- PLAYER 3 -->
-<div class="player" data-kills="13" data-damage="2036">
-  <div class="flip-card">
-    <div class="flip-inner">
-      <div class="card-front">
-        <img src="images/god.png" alt="V7 God">
-        <h2 class="player-name">GOD</h2>
-        <div class="badges"></div>
-      </div>
-      <div class="card-back">
-        <div class="stats">
-          <div class="stat">
-            <h3>Kills</h3>
-            <span class="count" data-value="13">0</span>
-          </div>
-          <div class="stat">
-            <h3>Damage</h3>
-            <span class="count" data-value="2036">0</span>
+  <!-- PLAYER 3 -->
+  <div class="player" data-kills="14" data-damage="2408">
+    <div class="flip-card">
+      <div class="flip-inner">
+        <div class="card-front">
+          <img src="images/god.png" alt="V7 God">
+          <h2 class="player-name">GOD</h2>
+          <div class="badges"></div>
+        </div>
+        <div class="card-back">
+          <div class="stats">
+            <div class="stat">
+              <span class="count" data-value="14">0</span>
+              <p>Kills</p>
+            </div>
+            <div class="stat">
+              <span class="count" data-value="2408">0</span>
+              <p>Damage</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- PLAYER 4 -->
-<div class="player" data-kills="7" data-damage="734">
-  <div class="flip-card">
-    <div class="flip-inner">
-      <div class="card-front">
-        <img src="images/rune.png" alt="V7 Rune">
-        <h2 class="player-name">RUNE</h2>
-        <div class="badges"></div>
-      </div>
-      <div class="card-back">
-        <div class="stats">
-          <div class="stat">
-            <h3>Kills</h3>
-            <span class="count" data-value="7">0</span>
-          </div>
-          <div class="stat">
-            <h3>Damage</h3>
-            <span class="count" data-value="734">0</span>
+  <!-- PLAYER 4 -->
+  <div class="player" data-kills="7" data-damage="734">
+    <div class="flip-card">
+      <div class="flip-inner">
+        <div class="card-front">
+          <img src="images/rune.png" alt="V7 Rune">
+          <h2 class="player-name">RUNE</h2>
+          <div class="badges"></div>
+        </div>
+        <div class="card-back">
+          <div class="stats">
+            <div class="stat">
+              <span class="count" data-value="7">0</span>
+              <p>Kills</p>
+            </div>
+            <div class="stat">
+              <span class="count" data-value="734">0</span>
+              <p>Damage</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- PLAYER 5 -->
-<div class="player" data-kills="0" data-damage="0">
-  <div class="flip-card">
-    <div class="flip-inner">
-      <div class="card-front">
-        <img src="images/myth.png" alt="V7 Myth">
-        <h2 class="player-name">MYTH</h2>
-        <div class="badges"></div>
-      </div>
-      <div class="card-back">
-        <div class="stats">
-          <div class="stat">
-            <h3>Kills</h3>
-            <span class="count" data-value="0">0</span>
-          </div>
-          <div class="stat">
-            <h3>Damage</h3>
-            <span class="count" data-value="0">0</span>
+  <!-- PLAYER 5 -->
+  <div class="player" data-kills="0" data-damage="0">
+    <div class="flip-card">
+      <div class="flip-inner">
+        <div class="card-front">
+          <img src="images/myth.png" alt="V7 Myth">
+          <h2 class="player-name">MYTH</h2>
+          <div class="badges"></div>
+        </div>
+        <div class="card-back">
+          <div class="stats">
+            <div class="stat">
+              <span class="count" data-value="0">0</span>
+              <p>Kills</p>
+            </div>
+            <div class="stat">
+              <span class="count" data-value="0">0</span>
+              <p>Damage</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+
 </div>
 
-<a href="index.html" class="back-btn">RETURN HOME</a>
+<script>
+/* ===== MAIN JS ===== */
+const players = document.querySelectorAll(".player");
+let topFragger = null;
+let mvp = null;
 
-<script src="players.js"></script>
+/* Add V7 prefix */
+players.forEach(p => {
+  const nameEl = p.querySelector(".player-name");
+  nameEl.textContent = "V7 " + nameEl.textContent.trim();
+});
+
+/* Determine MVP & Top Fragger */
+players.forEach(p => {
+  const kills = +p.dataset.kills;
+  const damage = +p.dataset.damage;
+
+  if (!topFragger || kills > topFragger.kills || (kills === topFragger.kills && damage > topFragger.damage)) {
+    topFragger = { player: p, kills, damage };
+  }
+
+  if (!mvp || damage > mvp.damage) {
+    mvp = { player: p, damage };
+  }
+});
+
+/* Apply badges & glow */
+players.forEach(p => {
+  const badgeBox = p.querySelector(".badges");
+  if (p === mvp.player) {
+    badgeBox.innerHTML += `<div class="badge mvp">👑 MVP</div>`;
+    p.querySelector(".flip-card").classList.add("mvp-card");
+  }
+  if (p === topFragger.player) {
+    badgeBox.innerHTML += `<div class="badge top-fragger">💥 Top Fragger</div>`;
+  }
+});
+
+/* Flip + counter + tap + 4-direction swipe */
+players.forEach(player => {
+  const card = player.querySelector(".flip-card");
+  const counters = player.querySelectorAll(".count");
+  let animated = false;
+
+  let touchStartX = 0;
+  let touchStartY = 0;
+
+  // Tap
+  card.addEventListener("click", flipCard);
+
+  // Swipe
+  card.addEventListener("touchstart", e => {
+    touchStartX = e.changedTouches[0].screenX;
+    touchStartY = e.changedTouches[0].screenY;
+  });
+
+  card.addEventListener("touchend", e => {
+    const touchEndX = e.changedTouches[0].screenX;
+    const touchEndY = e.changedTouches[0].screenY;
+    const dx = touchEndX - touchStartX;
+    const dy = touchEndY - touchStartY;
+    if (Math.abs(dx) > 30 || Math.abs(dy) > 30) flipCard();
+  });
+
+  function flipCard() {
+    card.classList.toggle("flipped");
+
+    if (!animated && card.classList.contains("flipped")) {
+      counters.forEach(animateCounter);
+      animated = true;
+    }
+
+    if (card.classList.contains("flipped")) {
+      setTimeout(() => card.classList.remove("flipped"), 3000);
+    }
+  }
+});
+
+/* Counter animation */
+function animateCounter(el) {
+  const target = +el.dataset.value;
+  let current = 0;
+  const step = Math.ceil(target / 40);
+  function run() {
+    current += step;
+    if (current >= target) {
+      el.textContent = target;
+      return;
+    }
+    el.textContent = current;
+    requestAnimationFrame(run);
+  }
+  run();
+}
+</script>
+
 </body>
 </html>
