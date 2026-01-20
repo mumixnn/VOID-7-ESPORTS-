@@ -1,8 +1,26 @@
-const SCRIM_HISTORY = [
-  { date: "13 Jan 2026", standing: 1 },
-  { date: "15 Jan 2026", standing: 16 },
-  { date: "16 Jan 2026", standing: 15 },
-  { date: "17 Jan 2026", standing: 5 },
-  { date: "18 Jan 2026", standing: 10 },
-  { date: "19 Jan 2026", standing: 9 }
+const scrims = [
+  {
+    date: "2026-01-17",
+    month: "January",
+    year: 2026,
+    players: [
+      { name: "LUFFY", kills: 8, damage: 1371 },
+      { name: "VIEL", kills: 13, damage: 2008 },
+      { name: "GOD", kills: 13, damage: 2036 },
+      { name: "RUNE", kills: 7, damage: 734 },
+      { name: "MYTH", kills: 0, damage: 0 }
+    ]
+  },
+  {
+    date: "2026-01-18",
+    month: "January",
+    year: 2026,
+    players: [
+      { name: "LUFFY", kills: 10, damage: 1800 },
+      { name: "VIEL", kills: 9, damage: 1650 },
+      { name: "GOD", kills: 7, damage: 1400 },
+      { name: "RUNE", kills: 6, damage: 900 },
+      { name: "MYTH", kills: 2, damage: 400 }
+    ]
+  }
 ];
